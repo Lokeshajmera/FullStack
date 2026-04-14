@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const pdfParse = require('pdf-parse');
 const Groq = require('groq-sdk');
+const { GoogleGenerativeAI } = require('@google/genai');
 const fs = require('fs');
 
 // Simple setup for multer to receive uploaded file in memory
@@ -30,6 +31,11 @@ const pyqData = {
 const getGroqClient = () => {
     if (!process.env.GROQ_API_KEY) return null;
     return new Groq({ apiKey: process.env.GROQ_API_KEY });
+};
+
+const getGenAI = () => {
+    if (!process.env.GEMINI_API_KEY) return null;
+    return new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 };
 
 const chunkText = (text, size) => {
@@ -204,14 +210,11 @@ router.post('/ask', upload.single('file'), async (req, res) => {
 
             prompt += `QUESTION: ${question}`;
 
-            const response = await genAI.models.generateContent({
-                model: 'gemini-2.5-flash',
-                contents: prompt,
-            });
+            const response = await genAI.getGenerativeModel({ model: "gemini-1.5-flash" }).generateContent(prompt);
 
             return res.status(200).json({
                 success: true,
-                answer: response.text
+                answer: response.response.text()
             });
 
         } else {
@@ -259,5 +262,3 @@ router.get('/pyq-analysis/:subjectId', async (req, res) => {
 });
 
 module.exports = router;
-
-

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send, Bot, User, Loader2 } from 'lucide-react';
+import { API_BASE_URL } from "../config/api";
 
 const AITutorChat = ({ isOpen, onClose, contextTitle, documentLink }) => {
     const [messages, setMessages] = useState([
@@ -55,7 +56,7 @@ const AITutorChat = ({ isOpen, onClose, contextTitle, documentLink }) => {
                 headers = { 'Content-Type': 'application/json' };
             }
 
-            const res = await fetch('http://localhost:5000/api/ai/ask', {
+            const res = await fetch(`${API_BASE_URL}/api/ai/ask`, {
                 method: 'POST',
                 headers: headers,
                 body: bodyData

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Sparkles, Download, FileText, Loader2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { API_BASE_URL } from "../config/api";
 
 const SmartSummaryModal = ({ isOpen, onClose, documentLink, documentTitle }) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +25,7 @@ const SmartSummaryModal = ({ isOpen, onClose, documentLink, documentTitle }) => 
                     formData.append('file', blob, 'document.pdf');
 
                     // Send to our backend parser & summarizer
-                    return fetch(`http://localhost:5000/api/ai/summarize`, {
+                    return fetch(`${API_BASE_URL}/api/ai/summarize`, {
                         method: 'POST',
                         body: formData
                     });

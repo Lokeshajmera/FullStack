@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, BarChart2, Loader2, TrendingUp, Search } from 'lucide-react';
+import { API_BASE_URL } from "../config/api";
 
 const PYQAnalyzerModal = ({ isOpen, onClose, subjectId, subjectName }) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -12,7 +13,7 @@ const PYQAnalyzerModal = ({ isOpen, onClose, subjectId, subjectName }) => {
             setIsLoading(true);
             setError(null);
 
-            fetch(`http://localhost:5000/api/ai/pyq-analysis/${subjectId}`)
+            fetch(`${API_BASE_URL}/api/ai/pyq-analysis/${subjectId}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {

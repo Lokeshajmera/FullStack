@@ -8,11 +8,21 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        if (!supabase) {
+            setLoading(false);
+            return;
+        }
+
         // Fetch current session
         const getSession = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
-            setUser(session?.user ?? null);
-            setLoading(false);
+            try {
+                const { data: { session } } = await supabase.auth.getSession();
+                setUser(session?.user ?? null);
+            } catch (err) {
+                console.error("Supabase Session Error:", err);
+            } finally {
+                setLoading(false);
+            }
         };
         
         getSession();
@@ -22,7 +32,7 @@ export const AuthProvider = ({ children }) => {
             setUser(session?.user ?? null);
         });
 
-        return () => subscription.unsubscribe();
+        return () => subscription?.unsubscribe();
     }, []);
 
     const login = async (email, password) => {

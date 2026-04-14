@@ -1,0 +1,27 @@
+export const patentsData = [
+    { sr: 1, facultyName: "1. Dr. Sonal Abhijeet Gore\n2. Mohit Sunil Gandhi\n3. Aniket Dhole\n4. Shrishail Kumbhar\n5. Harsh Singhal", title: "Iot Based Portable Health Monitoring System Using Edge Computing", type: "Faculty & Student", status: "Published & Application No. 202221028427" },
+    { sr: 2, facultyName: "1. Prof. Namita K. Shinde\n2. Prof. Payal Kadam\n3. Prof. Priti Chakurkar\n4. Prof Rupali Vilas Salunke\n5. Prof. Meenakshi Patil\n6. Prof. Pallavi Vishnu Dhade", title: "Machine Learning And IOT Based Intelligent Wireless Communication System For Solving Real World Security Issues", type: "Faculty", status: "Published & Application No. 202221075232" },
+    { sr: 3, facultyName: "1. Sonal Gore\n2. Shriraj Chinchwade\n3. Niraj Garudkar\n4. Sumedh Jadhav\n5. Prasad Gaikwad\n6. Rucha Shinde", title: "Fruit Maturity Inspection System Using Thermal Imaging And A Method Thereof", type: "Faculty & Student", status: "Published & Application No. 202321032291" },
+    { sr: 4, facultyName: "1. Dr. Jyoti S. Kulkarni\n2. Dr. M. T. Kolte\n3. Mr. S. S. Ayane\n4. Dr. K. S. Kinage\n5. Mr. K. B. Kotangale\n6. Mrs. A. S. Pawar\n7. Mrs. S. M. Dhavale\n8. Mrs. S. V. Patil", title: "Wireless Digital Stethoscope With An Integrated Bluetooth", type: "Faculty", status: "Published & Application No. 202421011211" },
+    { sr: 5, facultyName: "1. Swapnil Shivram Ayane\n2. Swaraj Uttam Pashankar\n3. Shubham B Dhulugade\n4. Nikhil Ravindra Patil\n5. Mahesh Janardhan Raut\n6. Jyoti S. Kulkarni\n7. Swati V. Patil\n8. Aarti S. Pawar\n9. Harshal N. Nimje", title: "A Portable Tea Cup Washing Machine", type: "Faculty & Student", status: "Published & Application No. 202421011939" },
+    { sr: 6, facultyName: "1. Harshad Gholve\n2. Minal Azad\n3. Om Bhavsar\n4. Tushar Garad\n5. Pallavi Nikumbh", title: "College Preference List Recommendation System And Method", type: "Faculty & Student", status: "Granted & Application No. 202421014633" },
+    { sr: 7, facultyName: "1. Atharva Galne\n2. Utkarsh Patil\n3. Sarthak Kshirsagar\n4. Vaibhav Gangurde\n5. Shailaja Pede", title: "Realtime Crowd Distribution System And Method For A Railway Platform", type: "Faculty & Student", status: "Granted & Application No. 202421020276" },
+    { sr: 8, facultyName: "1. Atharva Joshi\n2. Prathmesh Kolekar\n3. Aditya Metkar\n4. Shailaja Pede", title: "Method And System For Automatic Candidate Assessments Based On Resume For Skill Recommendation", type: "Faculty & Student", status: "Published & Application No. 202421026722" },
+    { sr: 9, facultyName: "1. Pradnya Narkhede\n2. Anuradha Thakare\n3. Santwana Gudadhe\n4. Sonal Gore", title: "Dog Harness", type: "Faculty", status: "Granted & Application No. 464912-001" },
+    { sr: 10, facultyName: "1. Pradnya Narkhede\n2. Anuradha Thakare\n3. Debottam Devnath\n4. Omkar Nikam\n5. Jay Surana\n6. Sanchit Patil", title: "Integrated Multi-Sensor Health And Gps Monitoring Harness System For Pets", type: "Faculty & Student", status: "Filed & Application No. 202521134642" }
+];
+
+export const copyrightsData = [
+    { sr: 1, facultyName: "Dr. Anuradha Thakare", title: "Dataset for Polycystic Ovary Syndrome", type: "Faculty", status: "Registered & Diary No. 20819/2019-CO/L. (2018-19)" },
+    { sr: 2, facultyName: "Dr. Anuradha Thakare", title: "Virtual Trial Room for Sari", type: "Faculty", status: "Registered & Diary No. 3959/2016-CO/SW (2016-17)" },
+    { sr: 3, facultyName: "Dr. Anuradha Thakare", title: "An application for Parent Teacher Interaction", type: "Faculty", status: "Registered & Diary No. 17051/2018- CO/SW (2018-19)" },
+    { sr: 4, facultyName: "Dr. Anuradha Thakare", title: "An improved approach for Sentiment Analysis Using Apache Spark", type: "Faculty", status: "Registered & Diary No. 5382/2019- CO/SW. (2019-20)" },
+    { sr: 5, facultyName: "Dr. Anuradha Thakare", title: "System for classification of seizures disorder using EEG signals", type: "Faculty", status: "Registered & Diary No. 11647/2019- CO/SW. (2019-20)" },
+    { sr: 6, facultyName: "Dr. Anuradha Thakare", title: "CONVOLUTIONAL NEURAL NETWORK FOR PNEUMONIA", type: "Faculty", status: "Registered & Diary No. L-103240/2021 (2020-21)" },
+    { sr: 7, facultyName: "Dr. Sonal Gore", title: "Attendance analysis software for educational organization", type: "Faculty", status: "Registered & Diary No. 2150/2019-CO/SW (2019-2020)" },
+    { sr: 8, facultyName: "Dr. Sonal Gore", title: "Student Performance Analysis and Score Card generation", type: "Faculty", status: "Registered & Diary No. 2153/2019-CO/SW. (2019-2020)" },
+    { sr: 9, facultyName: "Dr. Sonal Gore", title: "Design of Data Management and Prediction about Health Status to Support Health Care System Using QR Code", type: "Faculty", status: "Filed & Diary No. 5003/2016-CO/SW (2016-17)" },
+    { sr: 10, facultyName: "Prof. Pallavi Dhade", title: "Presentation on Design and analysis of algorithm", type: "Faculty", status: "Registered & Diary No. 2148/2019-CO/L (2019-20)" },
+    { sr: 11, facultyName: "Prof. Santwana Gudadhe", title: "PhD Research Synopsis", type: "Faculty", status: "Registered & Diary No. 1464/2023-CO/L (2022-23)" },
+    { sr: 12, facultyName: "1. Mr. Atharva Kamtalwar\n2. Dr. A.D. Thakare\n3. Dr. Jyoti S. Kulkarni", title: "Neuronetz-An intelligent whatsapp assistant for corporate productivity", type: "Faculty", status: "Registered & Diary No. LD-25428/2025-CO" }
+];

@@ -1,0 +1,245 @@
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { BrainCircuit, Calendar, Award, Lightbulb, User } from 'lucide-react';
+import pallaviDhade from '../assets/faculty/pallavi-dhade.jpg';
+import ruturajPandharkar from '../assets/simsaa/ruturaj_pandharkar.webp';
+import truptiSukale from '../assets/simsaa/trupti_sukale.webp';
+import piyushDaspute from '../assets/simsaa/piyush_daspute.webp';
+import abhishekNikam from '../assets/simsaa/abhishek_nikam.webp';
+
+// CIS Events Images
+import in1 from '../assets/ieee/insightx-01.jpg';
+import in2 from '../assets/ieee/insightx-02.jpg';
+import in3 from '../assets/ieee/insightx-03.jpg';
+import in5 from '../assets/ieee/insightx-05.jpg';
+
+import techx1 from '../assets/ieee/iee-techxpune-25-01.jpg';
+import techx2 from '../assets/ieee/iee-techxpune-25-02.jpg';
+import techx3 from '../assets/ieee/iee-techxpune-25-03.jpg';
+import techx4 from '../assets/ieee/iee-techxpune-25-04.jpg';
+import techx5 from '../assets/ieee/iee-techxpune-25-05.jpg';
+
+import ind1 from '../assets/ieee/ieee-induction-01.jpg';
+import ind2 from '../assets/ieee/ieee-induction-02.jpg';
+import ind3 from '../assets/ieee/ieee-induction-03.jpg';
+import ind4 from '../assets/ieee/ieee-induction-04.jpg';
+
+const AutoCarousel = ({ images }) => {
+    const [active, setActive] = useState(0);
+
+    useEffect(() => {
+        if (!images || images.length <= 1) return;
+        const interval = setInterval(() => {
+            setActive((prev) => (prev + 1) % images.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, [images]);
+
+    if (!images || images.length === 0) return null;
+
+    return (
+        <div className="h-64 lg:h-[400px] w-full overflow-hidden relative group-hover:scale-102 transition-transform duration-500 bg-slate-100/50 dark:bg-slate-800/50 flex items-center justify-center p-4 rounded-2xl shadow-inner">
+            <AnimatePresence mode="wait">
+                <motion.img
+                    key={active}
+                    src={images[active]}
+                    alt={`Slide ${active + 1}`}
+                    className="w-full h-full object-contain drop-shadow-md rounded-lg"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                />
+            </AnimatePresence>
+            
+            {images.length > 1 && (
+                <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-1.5 z-10">
+                    {images.map((_, i) => (
+                        <div 
+                            key={i} 
+                            className={`h-1.5 rounded-full transition-all duration-300 shadow-sm ${i === active ? 'w-4 bg-purple-500' : 'w-1.5 bg-slate-400/50 dark:bg-slate-500/50'}`}
+                        />
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
+
+const IeeeCisChapter = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    const leaders = [
+        {
+            name: "Mrs. Pallavi V. Dhade",
+            role: "IEEE CIS Branch Chapter Head",
+            image: pallaviDhade
+        },
+        {
+            name: "Mr. Ruturaj Pandharkar",
+            role: "Chair IEEE CIS",
+            image: ruturajPandharkar
+        },
+        {
+            name: "Ms. Trupti Sukale",
+            role: "Vice Chair IEEE CIS",
+            image: truptiSukale
+        },
+        {
+            name: "Mr. Piyush Dashpute",
+            role: "Secretary, IEEE CIS",
+            image: piyushDaspute
+        },
+        {
+            name: "Mr. Abhishek Nikam",
+            role: "Treasurer, IEEE CIS",
+            image: abhishekNikam
+        }
+    ];
+
+    const events = [
+        {
+            title: "INSIGHTX – The Data Science Challenge",
+            date: "24th and 25th Feb 2026",
+            description: "IEEE CIS student chapter PCCOE conducted INSIGHTX – The Data Science Challenge Capture the flag on 24th and 25th Feb 2026.",
+            images: [in1, in2, in3, in5]
+        },
+        {
+            title: "IEEE Computer Society SYP TECHXPUNE’25",
+            date: "7th October 2025 (IEEE Day)",
+            description: "The IEEE Computer Society Student Chapter PCCOE, with IEEE Computer Society Pune and the IEEE Pune Section, successfully organized IEEE Computer Society SYP TECHXPUNE’25.",
+            images: [techx1, techx2, techx3, techx4, techx5]
+        },
+        {
+            title: "IEEE Induction Program",
+            date: "2025-26",
+            description: "IEEE Computational Intelligence (CIS) & IEEE Computer Society (CS) Chapter Induction for year 2025-26.",
+            images: [ind1, ind2, ind3, ind4]
+        }
+    ];
+
+    return (
+        <div className="bg-stone-50 dark:bg-slate-950 min-h-screen pt-24 pb-16">
+            
+            {/* Header section */}
+            <div className="bg-purple-700 dark:bg-purple-900/40 py-16 mb-12">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-center max-w-4xl mx-auto"
+                    >
+                        <h1 className="text-4xl md:text-5xl font-black text-white mb-6">
+                            IEEE CIS Chapter
+                        </h1>
+                        <p className="text-xl text-purple-100 dark:text-purple-200/80 mb-2 font-medium">
+                            Computational Intelligence Society Student Branch
+                        </p>
+                    </motion.div>
+                </div>
+            </div>
+
+            {/* Description section */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="bg-stone-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 md:p-12 shadow-xl"
+                >
+                    <div className="flex items-center mb-6">
+                        <Lightbulb className="w-8 h-8 text-purple-500 mr-4" />
+                        <h2 className="text-3xl font-bold text-slate-900 dark:text-white">About IEEE CIS</h2>
+                    </div>
+                    <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed mb-6">
+                        The IEEE Computational Intelligence Society (IEEE CIS) Student Branch Chapter is established at PCCoE to promote learning, research, and innovation in the field of Computational Intelligence, including areas such as Artificial Intelligence, Machine Learning, Neural Networks, and Evolutionary Computing. As a part of the global professional organization Institute of Electrical and Electronics Engineers (IEEE), the chapter provides students with opportunities to participate in technical workshops, seminars, research activities, and industry interactions.
+                    </p>
+                    <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                        The main purpose of the chapter is to enhance students' technical knowledge beyond the classroom, encourage research and innovation, and develop professional and leadership skills. It also helps students connect with experts, access IEEE resources, and stay updated with emerging technologies, thereby preparing them for successful careers in advanced computing and intelligent systems.
+                    </p>
+                </motion.div>
+            </div>
+
+            {/* Leadership Section */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Chapter Leadership</h2>
+                    <div className="w-24 h-1 bg-purple-500 mx-auto rounded-full"></div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 justify-items-center">
+                    {leaders.map((leader, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.4, delay: index % 4 * 0.1 }}
+                            viewport={{ once: true }}
+                            className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 hover:border-purple-500/50 transition-all duration-300 group flex flex-col items-center h-full w-full max-w-[280px]"
+                        >
+                            <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden flex-shrink-0 mb-4 border-4 border-slate-200 dark:border-slate-700 group-hover:border-purple-500 transition-colors duration-300 shadow-xl">
+                                <img 
+                                    src={leader.image} 
+                                    alt={leader.name} 
+                                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                                />
+                            </div>
+                            <div className="text-center flex-grow flex flex-col justify-center items-center w-full">
+                                <h3 className="text-[16px] font-bold text-slate-900 dark:text-white mb-2 group-hover:text-purple-400 transition-colors leading-tight">{leader.name}</h3>
+                                <p className="text-[11px] font-medium text-purple-600 dark:text-purple-300 bg-purple-100 dark:bg-purple-950/50 py-1 px-3 rounded-full border border-purple-200 dark:border-purple-800/30 inline-block leading-tight">
+                                    {leader.role}
+                                </p>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Activities Section */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+                <div className="flex items-center mb-12">
+                    <Calendar className="w-8 h-8 text-purple-500 mr-4" />
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Recent Activities</h2>
+                </div>
+
+                <div className="space-y-16">
+                    {events.map((event, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="bg-amber-50/60 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-lg p-6 lg:p-8"
+                        >
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                                {/* Event Info */}
+                                <div>
+                                    <div className="inline-block bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 rounded-full px-4 py-1.5 text-sm font-bold mb-4 flex items-center w-fit">
+                                        <Calendar size={14} className="mr-2" />
+                                        {event.date}
+                                    </div>
+                                    <h3 className="text-3xl font-black text-slate-900 dark:text-white mb-6 leading-tight">
+                                        {event.title}
+                                    </h3>
+                                    <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                                        {event.description}
+                                    </p>
+                                </div>
+
+                                {/* Event Images Carousel */}
+                                <div className="w-full">
+                                    <AutoCarousel images={event.images} />
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+
+        </div>
+    );
+};
+
+export default IeeeCisChapter;

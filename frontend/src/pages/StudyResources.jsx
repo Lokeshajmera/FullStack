@@ -438,12 +438,16 @@ const ResourceSection = ({ title, icon, items, onSummarize }) => {
                                 <FileText className="w-5 h-5 text-slate-600 dark:text-neutral-400" />
                             </div>
                             <div className="flex-1">
-                                <p className="font-medium text-slate-800 dark:text-neutral-200 group-hover:text-slate-900 dark:text-white transition-colors line-clamp-1 pr-20">{item.title}</p>
-                                <div className="flex items-center gap-3 mt-1 text-xs text-neutral-500">
-                                    <span className="uppercase text-[10px] font-bold tracking-wider px-2 py-0.5 rounded-sm bg-stone-100 dark:bg-neutral-800 text-slate-700 dark:text-neutral-300">{item.type || 'Doc'}</span>
+                                <p className="font-medium text-slate-900 dark:text-white transition-colors line-clamp-1 pr-20">
+                                    {item.title}
+                                </p>
+                                <div className="flex items-center gap-3 mt-1 text-xs text-slate-500 dark:text-slate-400">
+                                    <span className="uppercase text-[10px] font-bold tracking-wider px-2 py-0.5 rounded-sm bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+                                        {item.type || 'Doc'}
+                                    </span>
                                     {item.size && <span>{item.size}</span>}
                                     {item.uploader && (
-                                        <span className="text-cyan-600 dark:text-cyan-400 bg-cyan-900/20 px-2 py-0.5 rounded flex items-center border border-cyan-800/50">
+                                        <span className="text-cyan-600 dark:text-cyan-400 bg-cyan-500/5 px-2 py-0.5 rounded flex items-center border border-cyan-500/20">
                                             By: {item.uploader}
                                         </span>
                                     )}

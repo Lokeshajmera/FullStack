@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, FileText, MonitorPlay, Link as LinkIcon, ChevronRight, Download, ArrowLeft, FolderOpen, Video, Award, Sparkles, MessageSquare, BarChart2 } from 'lucide-react';
+import { BookOpen, FileText, MonitorPlay, Link as LinkIcon, ChevronRight, Download, ArrowLeft, FolderOpen, Video, Award, Sparkles } from 'lucide-react';
 import { studyResourcesData } from '../data/studyResourcesData';
 import { supabase } from '../lib/supabase';
 import { Link } from 'react-router-dom';
 import SmartSummaryModal from '../components/SmartSummaryModal';
-import PYQAnalyzerModal from '../components/PYQAnalyzerModal';
 
 const StudyResources = () => {
     const [selectedYear, setSelectedYear] = useState(null);
@@ -16,8 +15,6 @@ const StudyResources = () => {
     const [summaryModalOpen, setSummaryModalOpen] = useState(false);
     const [activeDocumentId, setActiveDocumentId] = useState(null);
     const [activeDocumentTitle, setActiveDocumentTitle] = useState('');
-
-    const [pyqModalOpen, setPyqModalOpen] = useState(false);
 
     // Dynamic Faculty Uploads
     const [facultyDocs, setFacultyDocs] = useState([]);
@@ -320,9 +317,6 @@ const StudyResources = () => {
                                                 title="Previous Year Papers (PYQs)"
                                                 icon={<FolderOpen className="w-5 h-5 text-amber-400" />}
                                                 items={selectedSubject.materials.pyqs}
-                                                onAnalyze={() => {
-                                                    setPyqModalOpen(true);
-                                                }}
                                             />
                                         )}
 
@@ -416,44 +410,29 @@ const StudyResources = () => {
                 documentLink={activeDocumentId} // Active doc id stores the link here
                 documentTitle={activeDocumentTitle}
             />
-
-            <PYQAnalyzerModal
-                isOpen={pyqModalOpen}
-                onClose={() => setPyqModalOpen(false)}
-                subjectId={selectedSubject?.id}
-                subjectName={selectedSubject?.name}
-            />
         </div>
     );
 };
 
 // Helper Component for rendering sections (Notes, PYQs, etc.)
-const ResourceSection = ({ title, icon, items, onSummarize, onAnalyze }) => {
+const ResourceSection = ({ title, icon, items, onSummarize }) => {
     return (
-        <div className="bg-amber-50/60 dark:bg-neutral-900/50 rounded-2xl border border-slate-200 dark:border-neutral-800 overflow-hidden">
-            <div className="p-5 border-b border-slate-200 dark:border-neutral-800 flex items-center justify-between bg-amber-50/60 dark:bg-neutral-900/80">
+        <div className="bg-stone-100/40 dark:bg-neutral-900/50 rounded-2xl border border-slate-200 dark:border-neutral-800 overflow-hidden">
+            <div className="p-5 border-b border-slate-200 dark:border-neutral-800 flex items-center justify-between bg-white/40 dark:bg-neutral-900/80">
                 <div className="flex items-center gap-3">
                     {icon}
                     <h3 className="font-bold text-lg">{title}</h3>
                 </div>
                 <div className="flex items-center gap-3">
-                    {onAnalyze && (
-                        <button
-                            onClick={onAnalyze}
-                            className="text-xs font-bold bg-amber-500/20 text-amber-400 hover:bg-amber-500/30 px-3 py-1.5 rounded-full flex items-center gap-1.5 transition-colors border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.2)]"
-                        >
-                            <BarChart2 className="w-3.5 h-3.5" /> Analyze PYQs (AI)
-                        </button>
-                    )}
                     <span className="text-xs font-semibold bg-stone-100 dark:bg-neutral-800 text-slate-600 dark:text-neutral-400 px-3 py-1 rounded-full hidden sm:inline-block">
                         {items.length} file{items.length !== 1 ? 's' : ''}
                     </span>
                 </div>
             </div>
 
-            <div className="divide-y divide-neutral-800/50">
+            <div className="divide-y divide-slate-200 dark:divide-neutral-800/50">
                 {items.map((item, index) => (
-                    <div key={index} className="group flex items-center justify-between p-4 hover:bg-stone-100 dark:bg-neutral-800/80 transition-colors relative">
+                    <div key={index} className="group flex items-center justify-between p-4 bg-white/20 dark:bg-transparent hover:bg-blue-500/5 dark:hover:bg-blue-500/10 transition-all duration-300 relative">
                         <div className="flex items-center gap-4 flex-1">
                             <div className="w-10 h-10 rounded-lg bg-stone-100 dark:bg-neutral-800 flex items-center justify-center shrink-0">
                                 <FileText className="w-5 h-5 text-slate-600 dark:text-neutral-400" />

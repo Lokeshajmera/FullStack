@@ -1,8 +1,8 @@
 import React from 'react';
 import { Calendar, Clock, MapPin, UserCheck, Sparkles } from 'lucide-react';
-import inns1 from '../../assets/inns/inns-event-1.webp';
-import inns2 from '../../assets/inns/inns-event-2.webp';
-import inns4 from '../../assets/inns/inns-event-4.webp';
+import inns1 from '../../assets/INNS/inns-event-1.webp';
+import inns2 from '../../assets/INNS/inns-event-2.webp';
+import inns4 from '../../assets/INNS/inns-event-4.webp';
 
 const eventImages = [inns1, inns2, inns4];
 

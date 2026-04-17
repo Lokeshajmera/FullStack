@@ -1,8 +1,8 @@
-﻿import React from 'react';
+import React from 'react';
 
 const InnsHero = () => {
     return (
-        <section className="relative w-full h-[60vh] min-h-[400px] flex flex-col items-center justify-center pt-16">
+        <section className="relative w-full h-[60vh] min-h-[400px] flex flex-col items-center justify-center">
             {/* Dark Neural Network Themed Background */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-slate-100 dark:bg-slate-900"
@@ -22,7 +22,7 @@ const InnsHero = () => {
                     </div>
                 </div>
 
-                <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 mb-6 drop-shadow-lg leading-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-slate-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-cyan-400 dark:via-blue-500 dark:to-indigo-500 mb-6 drop-shadow-lg leading-tight">
                     International Neural Network Society
                 </h1>
 

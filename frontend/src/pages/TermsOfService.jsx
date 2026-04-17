@@ -74,7 +74,7 @@ const TermsOfService = () => {
     useEffect(() => { window.scrollTo(0, 0); }, []);
 
     return (
-        <div className="min-h-screen bg-stone-50 dark:bg-slate-950 pt-28 pb-20 text-slate-700 dark:text-slate-300">
+        <div className="min-h-screen bg-stone-50 dark:bg-slate-950 pb-20 text-slate-700 dark:text-slate-300">
             {/* Hero Banner */}
             <div className="bg-gradient-to-br from-indigo-600 to-purple-700 dark:from-indigo-800 dark:to-purple-900 py-16 mb-16 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10">

@@ -120,7 +120,7 @@ const AaaiChapter = () => {
     ];
 
     return (
-        <div className="bg-stone-50 dark:bg-slate-950 min-h-screen pt-24 pb-16">
+        <div className="bg-stone-50 dark:bg-slate-950 min-h-screen pb-16">
             
             {/* Header section */}
             <div className="bg-cyan-600 dark:bg-cyan-900/40 py-16 mb-12">

@@ -51,13 +51,13 @@ const AutoCarousel = ({ images }) => {
                     transition={{ duration: 0.5 }}
                 />
             </AnimatePresence>
-            
+
             {images.length > 1 && (
                 <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-1.5 z-10">
                     {images.map((_, i) => (
-                        <div 
-                            key={i} 
-                            className={`h-1.5 rounded-full transition-all duration-300 shadow-sm ${i === active ? 'w-4 bg-purple-500' : 'w-1.5 bg-slate-400/50 dark:bg-slate-500/50'}`}
+                        <div
+                            key={i}
+                            className={`h-1.5 rounded-full transition-all duration-300 shadow-sm ${i === active ? 'w-4 bg-cyan-500' : 'w-1.5 bg-slate-400/50 dark:bg-slate-500/50'}`}
                         />
                     ))}
                 </div>
@@ -121,12 +121,12 @@ const IeeeCisChapter = () => {
     ];
 
     return (
-        <div className="bg-stone-50 dark:bg-slate-950 min-h-screen pt-24 pb-16">
-            
+        <div className="bg-stone-50 dark:bg-slate-950 min-h-screen pb-16">
+
             {/* Header section */}
-            <div className="bg-purple-700 dark:bg-purple-900/40 py-16 mb-12">
+            <div className="bg-cyan-600 dark:bg-cyan-900/40 py-16 mb-12">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="text-center max-w-4xl mx-auto"
@@ -134,7 +134,7 @@ const IeeeCisChapter = () => {
                         <h1 className="text-4xl md:text-5xl font-black text-white mb-6">
                             IEEE CIS Chapter
                         </h1>
-                        <p className="text-xl text-purple-100 dark:text-purple-200/80 mb-2 font-medium">
+                        <p className="text-xl text-cyan-50 dark:text-cyan-100/80 mb-2 font-medium">
                             Computational Intelligence Society Student Branch
                         </p>
                     </motion.div>
@@ -143,14 +143,14 @@ const IeeeCisChapter = () => {
 
             {/* Description section */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="bg-stone-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 md:p-12 shadow-xl"
                 >
                     <div className="flex items-center mb-6">
-                        <Lightbulb className="w-8 h-8 text-purple-500 mr-4" />
+                        <Lightbulb className="w-8 h-8 text-cyan-500 mr-4" />
                         <h2 className="text-3xl font-bold text-slate-900 dark:text-white">About IEEE CIS</h2>
                     </div>
                     <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed mb-6">
@@ -166,7 +166,7 @@ const IeeeCisChapter = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Chapter Leadership</h2>
-                    <div className="w-24 h-1 bg-purple-500 mx-auto rounded-full"></div>
+                    <div className="w-24 h-1 bg-cyan-500 mx-auto rounded-full"></div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 justify-items-center">
@@ -179,16 +179,16 @@ const IeeeCisChapter = () => {
                             viewport={{ once: true }}
                             className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 hover:border-purple-500/50 transition-all duration-300 group flex flex-col items-center h-full w-full max-w-[280px]"
                         >
-                            <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden flex-shrink-0 mb-4 border-4 border-slate-200 dark:border-slate-700 group-hover:border-purple-500 transition-colors duration-300 shadow-xl">
-                                <img 
-                                    src={leader.image} 
-                                    alt={leader.name} 
+                            <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden flex-shrink-0 mb-4 border-4 border-slate-200 dark:border-slate-700 group-hover:border-cyan-500 transition-colors duration-300 shadow-xl">
+                                <img
+                                    src={leader.image}
+                                    alt={leader.name}
                                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
                                 />
                             </div>
                             <div className="text-center flex-grow flex flex-col justify-center items-center w-full">
-                                <h3 className="text-[16px] font-bold text-slate-900 dark:text-white mb-2 group-hover:text-purple-400 transition-colors leading-tight">{leader.name}</h3>
-                                <p className="text-[11px] font-medium text-purple-600 dark:text-purple-300 bg-purple-100 dark:bg-purple-950/50 py-1 px-3 rounded-full border border-purple-200 dark:border-purple-800/30 inline-block leading-tight">
+                                <h3 className="text-[16px] font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:text-cyan-400 transition-colors leading-tight">{leader.name}</h3>
+                                <p className="text-[11px] font-bold text-cyan-800 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-950/20 py-1 px-3 rounded-full border border-cyan-200 dark:border-cyan-800/30 inline-block leading-tight">
                                     {leader.role}
                                 </p>
                             </div>
@@ -200,7 +200,7 @@ const IeeeCisChapter = () => {
             {/* Activities Section */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
                 <div className="flex items-center mb-12">
-                    <Calendar className="w-8 h-8 text-purple-500 mr-4" />
+                    <Calendar className="w-8 h-8 text-cyan-500 mr-4" />
                     <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Recent Activities</h2>
                 </div>
 
@@ -216,7 +216,7 @@ const IeeeCisChapter = () => {
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                                 {/* Event Info */}
                                 <div>
-                                    <div className="inline-block bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 rounded-full px-4 py-1.5 text-sm font-bold mb-4 flex items-center w-fit">
+                                    <div className="inline-block bg-cyan-100 dark:bg-cyan-900/40 text-cyan-700 dark:text-cyan-300 rounded-full px-4 py-1.5 text-sm font-bold mb-4 flex items-center w-fit">
                                         <Calendar size={14} className="mr-2" />
                                         {event.date}
                                     </div>

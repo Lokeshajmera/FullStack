@@ -6,7 +6,7 @@ import researchImg from '../assets/images/research-publications.jpg';
 
 const ResearchPublications = () => {
     return (
-        <div className="pt-[160px] bg-stone-50 dark:bg-slate-950 min-h-screen text-slate-700 dark:text-slate-300 font-sans pb-20">
+        <div className="bg-stone-50 dark:bg-slate-950 min-h-screen text-slate-700 dark:text-slate-300 font-sans pb-20">
             {/* Header */}
             <div className="py-16 text-center bg-slate-100 dark:bg-slate-900 border-b border-slate-300 dark:border-slate-800 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-cyan-900/20" />

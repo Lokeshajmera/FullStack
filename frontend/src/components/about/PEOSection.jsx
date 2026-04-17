@@ -1,27 +1,23 @@
-﻿import React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 const PEOSection = () => {
     const peos = [
         {
             id: "PEO-1",
-            title: "Expertise & Technologies",
-            description: "World-class expertise in AI & ML and emerging technologies."
+            description: "Graduates of the program will demonstrate world-class expertise in AI and ML and emerging technologies which help them to stands in crowd and grow careers in the technological era."
         },
         {
             id: "PEO-2",
-            title: "Continuous Learning",
-            description: "Technical competency with a continuous learning attitude."
+            description: "Graduates of the program will exhibit technical competency with learning attitude."
         },
         {
             id: "PEO-3",
-            title: "Ethics & Responsibility",
-            description: "Ethical and socially responsible professionals."
+            description: "Graduates of the program will practice their professional career with ethical and social responsibilities."
         },
         {
             id: "PEO-4",
-            title: "Research & Innovation",
-            description: "Research aptitude and an innovation mindset."
+            description: "Graduates of the program will demonstrate research aptitude and innovation throughout their career."
         }
     ];
 
@@ -77,9 +73,6 @@ const PEOSection = () => {
                                 <div className="inline-block px-3 py-1 bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-sm font-semibold rounded-full mb-4 w-max border border-cyan-500/20">
                                     {peo.id}
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
-                                    {peo.title}
-                                </h3>
                                 <p className="text-slate-600 dark:text-slate-400 leading-relaxed flex-1">
                                     {peo.description}
                                 </p>

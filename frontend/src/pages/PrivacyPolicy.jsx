@@ -62,7 +62,7 @@ const PrivacyPolicy = () => {
     useEffect(() => { window.scrollTo(0, 0); }, []);
 
     return (
-        <div className="min-h-screen bg-stone-50 dark:bg-slate-950 pt-28 pb-20 text-slate-700 dark:text-slate-300">
+        <div className="min-h-screen bg-stone-50 dark:bg-slate-950 pb-20 text-slate-700 dark:text-slate-300">
             {/* Hero Banner */}
             <div className="bg-gradient-to-br from-cyan-600 to-blue-700 dark:from-cyan-800 dark:to-blue-900 py-16 mb-16 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10">

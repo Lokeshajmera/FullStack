@@ -13,7 +13,7 @@ const GeeksforGeeksChapter = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-stone-50 dark:bg-slate-950 font-sans selection:bg-cyan-500/30 pt-20 pb-20">
+        <div className="min-h-screen bg-stone-50 dark:bg-slate-950 font-sans selection:bg-cyan-500/30 pb-20">
             <GfgHero />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24">
                 <GfgVision />

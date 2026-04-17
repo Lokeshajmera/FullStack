@@ -76,7 +76,7 @@ const StudyResources = () => {
                     <div className="inline-flex items-center justify-center p-3 bg-blue-500/10 rounded-2xl mb-6 ring-1 ring-blue-500/20">
                         <BookOpen className="w-8 h-8 text-blue-400" />
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight bg-gradient-to-r from-white via-blue-100 to-blue-300 text-transparent bg-clip-text">
+                    <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-slate-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-white dark:via-blue-100 dark:to-blue-300">
                         Centralized Study Resources
                     </h1>
                     <p className="text-slate-600 dark:text-neutral-400 text-lg md:text-xl max-w-2xl mx-auto">
@@ -418,10 +418,10 @@ const StudyResources = () => {
 const ResourceSection = ({ title, icon, items, onSummarize }) => {
     return (
         <div className="bg-stone-100/40 dark:bg-neutral-900/50 rounded-2xl border border-slate-200 dark:border-neutral-800 overflow-hidden">
-            <div className="p-5 border-b border-slate-200 dark:border-neutral-800 flex items-center justify-between bg-white/40 dark:bg-neutral-900/80">
+            <div className="p-5 border-b border-slate-200 dark:border-neutral-800 flex items-center justify-between bg-white dark:bg-neutral-900/80">
                 <div className="flex items-center gap-3">
                     {icon}
-                    <h3 className="font-bold text-lg">{title}</h3>
+                    <h3 className="font-bold text-lg text-slate-900 dark:text-white">{title}</h3>
                 </div>
                 <div className="flex items-center gap-3">
                     <span className="text-xs font-semibold bg-stone-100 dark:bg-neutral-800 text-slate-600 dark:text-neutral-400 px-3 py-1 rounded-full hidden sm:inline-block">

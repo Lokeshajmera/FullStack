@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Network, Building2, UserCircle2 } from 'lucide-react';
 import { industryInteractionsIntro } from '../../data/industryInteractionData';
 import sonalGore from '../../assets/faculty/sonal-gore_mam.jpg';
@@ -33,8 +33,8 @@ const IntroSection = () => {
                             ))}
                         </ul>
 
-                        <div className="bg-gradient-to-r from-cyan-900/20 to-blue-900/20 p-6 rounded-2xl border border-cyan-800/30">
-                            <p className="text-cyan-100 font-medium italic text-lg leading-relaxed">
+                        <div className="bg-cyan-50 dark:bg-cyan-900/20 p-6 rounded-2xl border border-cyan-200 dark:border-cyan-800/30">
+                            <p className="text-cyan-900 dark:text-cyan-100 font-bold italic text-lg leading-relaxed">
                                 "{industryInteractionsIntro.summary}"
                             </p>
                         </div>

@@ -52,12 +52,12 @@ const AutoCarousel = ({ images }) => {
                     transition={{ duration: 0.5 }}
                 />
             </AnimatePresence>
-            
+
             {images.length > 1 && (
                 <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-1.5 z-10">
                     {images.map((_, i) => (
-                        <div 
-                            key={i} 
+                        <div
+                            key={i}
                             className={`h-1.5 rounded-full transition-all duration-300 shadow-sm ${i === active ? 'w-4 bg-cyan-500' : 'w-1.5 bg-slate-400/50 dark:bg-slate-500/50'}`}
                         />
                     ))}
@@ -122,12 +122,12 @@ const IeeeCsChapter = () => {
     ];
 
     return (
-        <div className="bg-stone-50 dark:bg-slate-950 min-h-screen pt-24 pb-16">
-            
+        <div className="bg-stone-50 dark:bg-slate-950 min-h-screen pb-16">
+
             {/* Header section */}
             <div className="bg-cyan-600 dark:bg-cyan-900/40 py-16 mb-12">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="text-center max-w-4xl mx-auto"
@@ -144,7 +144,7 @@ const IeeeCsChapter = () => {
 
             {/* Description section */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -181,15 +181,15 @@ const IeeeCsChapter = () => {
                             className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 group flex flex-col items-center h-full w-full max-w-[280px]"
                         >
                             <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden flex-shrink-0 mb-4 border-4 border-slate-200 dark:border-slate-700 group-hover:border-cyan-500 transition-colors duration-300 shadow-xl">
-                                <img 
-                                    src={leader.image} 
-                                    alt={leader.name} 
+                                <img
+                                    src={leader.image}
+                                    alt={leader.name}
                                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
                                 />
                             </div>
                             <div className="text-center flex-grow flex flex-col justify-center items-center w-full">
                                 <h3 className="text-[16px] font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:text-cyan-400 transition-colors leading-tight">{leader.name}</h3>
-                                <p className="text-[11px] font-medium text-cyan-600 dark:text-cyan-700 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-950/50 py-1 px-3 rounded-full border border-cyan-200 dark:border-cyan-800/30 inline-block leading-tight">
+                                <p className="text-[11px] font-bold text-cyan-800 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-950/20 py-1 px-3 rounded-full border border-cyan-200 dark:border-cyan-800/30 inline-block leading-tight">
                                     {leader.role}
                                 </p>
                             </div>

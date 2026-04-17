@@ -6,11 +6,10 @@ const GfgHero = () => {
     return (
         <header className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden border-b border-slate-300 dark:border-slate-800">
             {/* Background elements */}
-            <div className="absolute inset-0 bg-grid-pattern opacity-10 z-0"></div>
             <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-950 via-transparent to-slate-900/50 z-0"></div>
             <div className="absolute right-0 top-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[100px] z-0"></div>
 
-            <div className="relative z-10 text-center px-4 max-w-4xl mx-auto mt-8 flex flex-col items-center">
+            <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
                 <motion.div
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
@@ -24,10 +23,10 @@ const GfgHero = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight drop-shadow-lg">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white mb-6 tracking-tight drop-shadow-lg">
                         GeeksforGeeks <span className="text-cyan-600 dark:text-cyan-400">Student Chapter</span>
                     </h1>
-                    <p className="text-lg md:text-xl text-cyan-200 font-medium tracking-wide">
+                    <p className="text-lg md:text-xl text-cyan-800 dark:text-cyan-200 font-bold tracking-wide">
                         Official GeeksforGeeks Campus Chapter – PCCOE
                     </p>
                 </motion.div>

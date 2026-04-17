@@ -1,11 +1,10 @@
-﻿import React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 const GfgHero = () => {
     return (
         <header className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden border-b border-slate-300 dark:border-slate-800">
             {/* Background elements */}
-            <div className="absolute inset-0 bg-grid-pattern opacity-10 z-0"></div>
             <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-950 via-transparent to-slate-900/50 z-0"></div>
             <div className="absolute right-0 top-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[100px] z-0"></div>
 

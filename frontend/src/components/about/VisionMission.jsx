@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Target, Compass, CheckCircle2 } from 'lucide-react';
 
@@ -50,19 +50,19 @@ const VisionMission = () => {
                             <div className="flex gap-4 items-start group">
                                 <CheckCircle2 className="w-6 h-6 text-cyan-600 dark:text-cyan-400 shrink-0 mt-1 transition-transform group-hover:scale-110" />
                                 <p className="text-lg text-slate-700 dark:text-slate-300">
-                                    Develop technically competent and innovative engineers in <span className="text-slate-900 dark:text-white font-medium">AI & ML</span>.
+                                    To develop technically competent and innovative computer science engineers with in-depth knowledge of <span className="text-slate-900 dark:text-white font-medium">Artificial Intelligence and Machine Learning</span>.
                                 </p>
                             </div>
                             <div className="flex gap-4 items-start group">
                                 <CheckCircle2 className="w-6 h-6 text-cyan-600 dark:text-cyan-400 shrink-0 mt-1 transition-transform group-hover:scale-110" />
                                 <p className="text-lg text-slate-700 dark:text-slate-300">
-                                    Build ethically responsible engineers for industry and society.
+                                    To build ethically responsible, knowledgeable and skilled engineers to serve the needs of industry and society at large.
                                 </p>
                             </div>
                             <div className="flex gap-4 items-start group">
                                 <CheckCircle2 className="w-6 h-6 text-cyan-600 dark:text-cyan-400 shrink-0 mt-1 transition-transform group-hover:scale-110" />
                                 <p className="text-lg text-slate-700 dark:text-slate-300">
-                                    Provide a conducive environment for holistic student development.
+                                    To provide conducive environment and opportunities for holistic development of students.
                                 </p>
                             </div>
                         </div>

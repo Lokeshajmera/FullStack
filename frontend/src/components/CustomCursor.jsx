@@ -12,14 +12,21 @@ const CustomCursor = () => {
 
     useEffect(() => {
         const moveCursor = (e) => {
-            cursorX.set(e.clientX - 16); // Center the 32px cursor
-            cursorY.set(e.clientY - 16);
+            const x = e.clientX || (e.touches && e.touches[0].clientX);
+            const y = e.clientY || (e.touches && e.touches[0].clientY);
+
+            if (x !== undefined && y !== undefined) {
+                cursorX.set(x - 16);
+                cursorY.set(y - 16);
+            }
         };
 
         const handleHoverStart = () => setIsHovered(true);
         const handleHoverEnd = () => setIsHovered(false);
 
         window.addEventListener('mousemove', moveCursor);
+        window.addEventListener('touchmove', moveCursor, { passive: true });
+        window.addEventListener('touchstart', moveCursor, { passive: true });
 
         const clickables = document.querySelectorAll('a, button, input, textarea, .cursor-pointer');
         clickables.forEach(el => {

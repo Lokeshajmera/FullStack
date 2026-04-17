@@ -42,7 +42,7 @@ const SpecializedLabs = () => {
     }, []);
 
     return (
-        <div className="pt-[160px] bg-stone-50 dark:bg-slate-950 min-h-screen font-sans pb-20">
+        <div className="bg-stone-50 dark:bg-slate-950 min-h-screen font-sans pb-20">
 
             {/* Header Area */}
             <div className="py-16 text-center bg-slate-100 dark:bg-slate-900 border-b border-slate-300 dark:border-slate-800 relative overflow-hidden">

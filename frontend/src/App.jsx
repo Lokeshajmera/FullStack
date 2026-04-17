@@ -68,14 +68,13 @@ function App() {
       <AuthProvider>
         <Router>
           <div className="flex flex-col min-h-screen font-sans selection:bg-cyan-500/30">
-            <div className="fixed inset-0 bg-grid-pattern pointer-events-none z-0" />
             <motion.div
               className="fixed top-0 left-0 right-0 h-1 bg-cyan-500 origin-left z-[100]"
               style={{ scaleX }}
             />
             <CustomCursor />
             <Navbar />
-            <main className="flex-grow z-10 relative">
+            <main className="flex-grow z-10 relative pt-24">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />

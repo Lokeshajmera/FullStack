@@ -12,7 +12,7 @@ const StudentDevelopmentWelfare = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-stone-50 dark:bg-slate-950 pt-24 pb-20">
+        <div className="min-h-screen bg-stone-50 dark:bg-slate-950 pb-20">
             {/* Header */}
             <SectionHeader
                 title="Student Development and Welfare (SDW)"
@@ -136,7 +136,7 @@ const StudentDevelopmentWelfare = () => {
                     viewport={{ once: true }}
                     className="bg-gradient-to-br from-slate-100 dark:from-slate-900 via-slate-900/80 to-slate-950 p-8 lg:p-10 rounded-3xl border border-slate-300 dark:border-slate-800 relative z-10"
                 >
-                    <div className="absolute inset-0 bg-grid-pattern opacity-5 mix-blend-overlay" />
+
                     <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-8 flex items-center gap-3 pb-4 border-b border-slate-300 dark:border-slate-800">
                         <Target className="text-cyan-600 dark:text-cyan-400" size={32} />
                         Objectives of SDW Cell

@@ -25,8 +25,8 @@ const ProfileCard = ({ profile, type = 'faculty' }) => {
                     
                     {/* Text overlay on bottom of the image area */}
                     <div className="w-full p-4 text-center z-10 bg-black/60 backdrop-blur-md absolute bottom-0 left-0 border-t border-slate-200 dark:border-slate-800/80">
-                        <h3 className="text-[17px] font-bold text-slate-900 dark:text-white mb-1 tracking-wide">{profile.name}</h3>
-                        <p className="text-[13px] font-semibold text-cyan-600 dark:text-cyan-400">
+                        <h3 className="text-[17px] font-bold text-white dark:text-white mb-1 tracking-wide">{profile.name}</h3>
+                        <p className="text-[13px] font-bold text-cyan-400 dark:text-cyan-400">
                             {profile.role ? `${profile.role} | ${profile.designation}` : profile.designation}
                         </p>
                     </div>
@@ -54,27 +54,27 @@ const ProfileCard = ({ profile, type = 'faculty' }) => {
                     {/* Quick Links / Buttons Row (Pills) */}
                     <div className="flex flex-wrap gap-3 mt-6">
                         {profile.website && profile.website !== '#' && profile.website !== '' && (
-                            <a href={profile.website} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-cyan-50 dark:bg-slate-800 text-cyan-600 dark:text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500 hover:text-white dark:hover:bg-cyan-400 dark:hover:text-slate-900 border border-cyan-100 dark:border-slate-700 hover:border-cyan-500 dark:hover:border-cyan-400 rounded-full text-[11px] font-bold tracking-wide transition-all duration-300 shadow-sm flex items-center justify-center transform hover:-translate-y-1">
+                            <a href={profile.website} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-cyan-600 dark:text-cyan-400 hover:bg-blue-600 hover:text-white dark:hover:bg-cyan-400 dark:hover:text-slate-900 border border-blue-100 dark:border-slate-700 hover:border-blue-600 dark:hover:border-cyan-400 rounded-full text-[11px] font-bold tracking-wide transition-all duration-300 shadow-sm flex items-center justify-center transform hover:-translate-y-1">
                                 Personal Website
                             </a>
                         )}
                         {profile.email && profile.email !== '#' && profile.email !== '' && (
-                            <a href={`mailto:${profile.email}`} className="px-4 py-2 bg-cyan-50 dark:bg-slate-800 text-cyan-600 dark:text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500 hover:text-white dark:hover:bg-cyan-400 dark:hover:text-slate-900 border border-cyan-100 dark:border-slate-700 hover:border-cyan-500 dark:hover:border-cyan-400 rounded-full text-[11px] font-bold tracking-wide transition-all duration-300 shadow-sm flex items-center justify-center transform hover:-translate-y-1">
+                            <a href={`mailto:${profile.email}`} className="px-4 py-2 bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-cyan-600 dark:text-cyan-400 hover:bg-blue-600 hover:text-white dark:hover:bg-cyan-400 dark:hover:text-slate-900 border border-blue-100 dark:border-slate-700 hover:border-blue-600 dark:hover:border-cyan-400 rounded-full text-[11px] font-bold tracking-wide transition-all duration-300 shadow-sm flex items-center justify-center transform hover:-translate-y-1">
                                 E-Mail
                             </a>
                         )}
                         {profile.scopus && profile.scopus !== '#' && profile.scopus !== '' && (
-                            <a href={profile.scopus} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-cyan-50 dark:bg-slate-800 text-cyan-600 dark:text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500 hover:text-white dark:hover:bg-cyan-400 dark:hover:text-slate-900 border border-cyan-100 dark:border-slate-700 hover:border-cyan-500 dark:hover:border-cyan-400 rounded-full text-[11px] font-bold tracking-wide transition-all duration-300 shadow-sm flex items-center justify-center transform hover:-translate-y-1">
+                            <a href={profile.scopus} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-cyan-600 dark:text-cyan-400 hover:bg-blue-600 hover:text-white dark:hover:bg-cyan-400 dark:hover:text-slate-900 border border-blue-100 dark:border-slate-700 hover:border-blue-600 dark:hover:border-cyan-400 rounded-full text-[11px] font-bold tracking-wide transition-all duration-300 shadow-sm flex items-center justify-center transform hover:-translate-y-1">
                                 Scopus Profile
                             </a>
                         )}
                         {profile.googleScholar && profile.googleScholar !== '#' && profile.googleScholar !== '' && (
-                            <a href={profile.googleScholar} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-cyan-50 dark:bg-slate-800 text-cyan-600 dark:text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500 hover:text-white dark:hover:bg-cyan-400 dark:hover:text-slate-900 border border-cyan-100 dark:border-slate-700 hover:border-cyan-500 dark:hover:border-cyan-400 rounded-full text-[11px] font-bold tracking-wide transition-all duration-300 shadow-sm flex items-center justify-center transform hover:-translate-y-1">
+                            <a href={profile.googleScholar} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-cyan-600 dark:text-cyan-400 hover:bg-blue-600 hover:text-white dark:hover:bg-cyan-400 dark:hover:text-slate-900 border border-blue-100 dark:border-slate-700 hover:border-blue-600 dark:hover:border-cyan-400 rounded-full text-[11px] font-bold tracking-wide transition-all duration-300 shadow-sm flex items-center justify-center transform hover:-translate-y-1">
                                 Google Scholar
                             </a>
                         )}
                         {profile.wos && profile.wos !== '#' && profile.wos !== '' && (
-                            <a href={profile.wos} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-cyan-50 dark:bg-slate-800 text-cyan-600 dark:text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500 hover:text-white dark:hover:bg-cyan-400 dark:hover:text-slate-900 border border-cyan-100 dark:border-slate-700 hover:border-cyan-500 dark:hover:border-cyan-400 rounded-full text-[11px] font-bold tracking-wide transition-all duration-300 shadow-sm flex items-center justify-center transform hover:-translate-y-1">
+                            <a href={profile.wos} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-cyan-600 dark:text-cyan-400 hover:bg-blue-600 hover:text-white dark:hover:bg-cyan-400 dark:hover:text-slate-900 border border-blue-100 dark:border-slate-700 hover:border-blue-600 dark:hover:border-cyan-400 rounded-full text-[11px] font-bold tracking-wide transition-all duration-300 shadow-sm flex items-center justify-center transform hover:-translate-y-1">
                                 WOS Profile
                             </a>
                         )}

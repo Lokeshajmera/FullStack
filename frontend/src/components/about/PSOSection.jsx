@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Bot, Network } from 'lucide-react';
 
@@ -7,12 +7,12 @@ const PSOSection = () => {
         {
             id: "PSO-1",
             icon: <Bot className="w-10 h-10 text-cyan-600 dark:text-cyan-400" />,
-            description: "Design intelligent scalable computing solutions using AI-ML."
+            description: "Graduates will be able to design and develop intelligent, efficient, and scalable computing solutions by applying Computer Science and AI-ML fundamentals."
         },
         {
             id: "PSO-2",
             icon: <Network className="w-10 h-10 text-purple-400" />,
-            description: "Integrate AI & ML with Robotics, Cloud, Cybersecurity, IoT, Agentic AI and modern technologies."
+            description: "Graduates will be able to integrate AI&ML with Robotics, cloud computing, cyber security,IoT,Agentic AI and other contemporary technologies to develop innovative,sustainable and secure applications."
         }
     ];
 

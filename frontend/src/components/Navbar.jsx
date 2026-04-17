@@ -101,11 +101,13 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`fixed w-full z-50 flex flex-col transition-all duration-300 ${scrolled ? 'bg-white/90 dark:bg-slate-950/80 backdrop-blur-md shadow-lg border-b border-slate-200 dark:border-slate-800' : 'bg-transparent'
+            className={`fixed w-full z-50 flex flex-col transition-all duration-300 ${scrolled
+                ? 'bg-white/90 dark:bg-slate-950/80 backdrop-blur-md shadow-lg border-b border-slate-200 dark:border-slate-800'
+                : 'bg-white/40 dark:bg-slate-950/20 backdrop-blur-sm border-b border-slate-200/30 dark:border-slate-800/20'
                 }`}
         >
             {/* Top Bar */}
-            <div className={`w-full text-slate-800 dark:text-white text-xs sm:text-sm py-1.5 transition-colors duration-300 ${scrolled ? 'bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800' : 'bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm border-b border-slate-200/50 dark:border-slate-800/50'}`}>
+            <div className={`w-full text-slate-800 dark:text-white text-[13.5px] py-1.5 transition-colors duration-300 ${scrolled ? 'bg-slate-100/50 dark:bg-slate-900/50' : 'bg-transparent'}`}>
                 <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 flex justify-between items-center">
                     <div className="flex items-center space-x-2">
                         <span className="flex items-center"><Phone size={14} className="mr-1" />+91 - 8087174347</span>
@@ -143,8 +145,8 @@ const Navbar = () => {
                             />
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-xl font-bold text-slate-900 dark:text-white tracking-wide group-hover:text-cyan-600 dark:group-hover:text-cyan-600 dark:text-cyan-400 transition-colors">PCCOE</span>
-                            <span className="text-xs text-cyan-600 dark:text-cyan-200 tracking-widest uppercase font-semibold">CSE-AIML Dept</span>
+                            <span className="text-[19px] font-bold text-slate-900 dark:text-white tracking-wide group-hover:text-cyan-600 dark:group-hover:text-cyan-600 dark:text-cyan-400 transition-colors">PCCOE</span>
+                            <span className="text-[11.5px] text-cyan-600 dark:text-cyan-200 tracking-widest uppercase font-semibold">CSE-AIML Dept</span>
                         </div>
                     </Link>
 
@@ -161,7 +163,7 @@ const Navbar = () => {
                                 >
                                     <Link
                                         to={link.path}
-                                        className={`flex items-center text-sm font-medium transition-colors duration-300 ${location.pathname === link.path ? 'text-cyan-600 dark:text-cyan-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-200 group-hover:text-cyan-600 dark:group-hover:text-cyan-600 dark:text-cyan-400'
+                                        className={`flex items-center text-[15px] font-medium transition-colors duration-300 ${location.pathname === link.path ? 'text-cyan-600 dark:text-cyan-600 dark:text-cyan-400' : 'text-slate-600 dark:text-slate-200 group-hover:text-cyan-600 dark:group-hover:text-cyan-600 dark:text-cyan-400'
                                             }`}
                                     >
                                         {link.name}
@@ -171,7 +173,7 @@ const Navbar = () => {
                                     {/* Desktop Dropdown */}
                                     {link.dropdown && (
                                         <div
-                                            className={`absolute top-full left-1/2 transform -translate-x-1/2 bg-amber-50/60 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-2xl overflow-hidden transition-all duration-300 origin-top ${hoveredMenu === link.name ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
+                                            className={`absolute top-full left-1/2 transform -translate-x-1/2 bg-white/95 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-2xl overflow-hidden backdrop-blur-md transition-all duration-300 origin-top ${hoveredMenu === link.name ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
                                                 } ${link.dropdown.length > 7 ? 'w-[480px]' : 'w-64'}`}
                                         >
                                             <div className={`p-2 ${link.dropdown.length > 7 ? 'grid grid-cols-2 gap-1' : 'space-y-1'}`}>

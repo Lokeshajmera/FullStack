@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import NeuralBackground from './NeuralBackground';
 import { ArrowRight, ChevronDown, Calendar } from 'lucide-react';
@@ -6,10 +6,11 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
     return (
-        <section className="relative h-screen flex items-center justify-center overflow-hidden bg-stone-50 dark:bg-slate-950 transition-colors duration-300">
+        <section className="relative h-screen flex items-start justify-center pt-4 overflow-hidden bg-stone-50 dark:bg-slate-950 transition-colors duration-300">
             {/* Background Elements */}
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-950 via-white/80 dark:via-slate-950/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-950 via-white/80 dark:via-slate-950/80 to-transparent z-0" />
+            <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white dark:from-slate-950 to-transparent opacity-80 z-0" />
             <NeuralBackground />
 
             {/* Content */}

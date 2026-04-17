@@ -14,7 +14,7 @@ const InnsEvent = () => {
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 <div className="text-center mb-10">
-                    <div className="inline-flex items-center justify-center space-x-2 bg-cyan-950/50 border border-cyan-800/50 text-cyan-600 dark:text-cyan-400 px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide uppercase mb-4">
+                    <div className="inline-flex items-center justify-center space-x-2 bg-cyan-100 dark:bg-cyan-950/50 border border-cyan-200 dark:border-cyan-800/50 text-cyan-800 dark:text-cyan-400 px-4 py-1.5 rounded-full text-sm font-bold tracking-wide uppercase mb-4">
                         <Sparkles size={16} />
                         <span>Featured Event</span>
                         <Sparkles size={16} />

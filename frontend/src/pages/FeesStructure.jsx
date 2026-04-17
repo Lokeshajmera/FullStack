@@ -71,7 +71,7 @@ const FeesStructure = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-stone-50 dark:bg-slate-950 pt-24 pb-20">
+        <div className="min-h-screen bg-stone-50 dark:bg-slate-950 pb-20">
             <SectionHeader
                 title="Fees Structure"
                 subtitle="Transparent and accessible fee structures for our academic programs."

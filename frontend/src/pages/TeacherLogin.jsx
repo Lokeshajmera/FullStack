@@ -33,7 +33,7 @@ const TeacherLogin = () => {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center pt-24 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
             {/* Background Decorators */}
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
             <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
@@ -49,8 +49,8 @@ const TeacherLogin = () => {
                         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm shadow-xl mb-4 text-cyan-600 dark:text-cyan-400">
                             <UserCircle2 size={32} />
                         </div>
-                        <h2 className="text-3xl font-bold text-white tracking-tight">Faculty Portal</h2>
-                        <p className="text-cyan-100/70 mt-2 text-sm">Sign in to manage academic resources and uploads</p>
+                        <h2 className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Faculty Portal</h2>
+                        <p className="text-slate-600 dark:text-cyan-100/70 mt-2 text-sm">Sign in to manage academic resources and uploads</p>
                     </div>
                 </div>
 

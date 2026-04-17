@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 
 import anuradhaMam from '../../assets/faculty/Anuradha_mam.jpeg';
 import jyotiKulkarni from '../../assets/faculty/jskulkarni.jpg';
@@ -24,8 +24,8 @@ const FacultyProfileCard = ({ name, role, image }) => (
             <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:text-cyan-400 transition-colors">
                 {name}
             </h3>
-            <p className="text-xs font-medium text-cyan-700 dark:text-cyan-300 bg-cyan-950/50 py-1.5 px-4 rounded-full border border-cyan-800/30 inline-block">
-                {role}
+            <p className="text-xs font-bold text-cyan-800 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-950/20 py-1.5 px-4 rounded-full border border-cyan-200 dark:border-cyan-800/30 inline-block">
+                {role || 'Member'}
             </p>
         </div>
     </div>

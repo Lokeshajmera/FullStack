@@ -24,7 +24,7 @@ const LeadershipCard = ({ member, index }) => (
         <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-green-400 transition-colors">
             {member.name}
         </h3>
-        <p className="text-green-400 font-medium px-4 py-1.5 bg-green-900/20 border border-green-800/40 rounded-full text-sm">
+        <p className="text-green-800 dark:text-green-400 font-bold px-4 py-1.5 bg-green-100 dark:bg-green-900/20 border border-green-200 dark:border-green-800/40 rounded-full text-sm">
             {member.role}
         </p>
     </motion.article>

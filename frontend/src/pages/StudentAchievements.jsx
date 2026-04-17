@@ -7,7 +7,7 @@ import { featuredAchievements } from '../data/studentAchievementsData';
 
 const StudentAchievements = () => {
     return (
-        <div className="bg-stone-50 dark:bg-slate-950 min-h-screen pt-24 pb-16 w-full text-slate-700 dark:text-slate-300">
+        <div className="bg-stone-50 dark:bg-slate-950 min-h-screen pb-16 w-full text-slate-700 dark:text-slate-300">
             {/* Page Header */}
             <div className="text-center mb-12 pt-8">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import hodImage from '../assets/faculty/Anuradha_mam.jpeg';  // For HOD Image
@@ -65,11 +65,11 @@ const FacultySection = () => {
                         transition={{ delay: 0.1 }}
                         className="bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(6,182,212,0.1)] flex flex-col h-[500px]"
                     >
-                        <div className="bg-cyan-500 py-4 px-6 font-bold text-slate-950 uppercase tracking-widest text-sm flex items-center justify-between z-10">
+                        <div className="bg-cyan-600 dark:bg-cyan-500 py-4 px-6 font-bold text-white dark:text-slate-950 uppercase tracking-widest text-sm flex items-center justify-between z-10">
                             Important Links
-                            <div className="w-2 h-2 rounded-full bg-stone-50 dark:bg-slate-950 animate-pulse"></div>
+                            <div className="w-2 h-2 rounded-full bg-white dark:bg-slate-950 animate-pulse"></div>
                         </div>
-                        <div className="flex-grow overflow-hidden relative marquee-container bg-white/50 dark:bg-slate-950/50">
+                        <div className="flex-grow overflow-hidden relative marquee-container bg-white dark:bg-slate-950">
                             <div className="animate-marquee flex flex-col pt-4">
                                 {/* Original List */}
                                 {importantLinks.map((link, idx) => (
@@ -104,11 +104,11 @@ const FacultySection = () => {
                         transition={{ delay: 0.2 }}
                         className="bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(6,182,212,0.1)] flex flex-col h-[500px]"
                     >
-                        <div className="bg-blue-500 py-4 px-6 font-bold text-slate-900 dark:text-white uppercase tracking-widest text-sm flex items-center justify-between z-10">
+                        <div className="bg-blue-600 dark:bg-blue-500 py-4 px-6 font-bold text-white uppercase tracking-widest text-sm flex items-center justify-between z-10">
                             News & Announcements
                             <div className="w-2 h-2 rounded-full bg-white animate-pulse"></div>
                         </div>
-                        <div className="flex-grow overflow-hidden relative marquee-container bg-white/50 dark:bg-slate-950/50">
+                        <div className="flex-grow overflow-hidden relative marquee-container bg-white dark:bg-slate-950">
                             <div className="animate-marquee-slow flex flex-col pt-4">
                                 {/* Original List */}
                                 {newsItems.map((news, idx) => (
@@ -158,7 +158,7 @@ const FacultySection = () => {
                         transition={{ delay: 0.3 }}
                         className="bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(6,182,212,0.1)] flex flex-col h-[500px]"
                     >
-                        <div className="bg-purple-500 py-4 px-6 font-bold text-slate-900 dark:text-white uppercase tracking-widest text-sm flex items-center justify-between z-10">
+                        <div className="bg-blue-600 dark:bg-purple-600 py-4 px-6 font-bold text-white uppercase tracking-widest text-sm flex items-center justify-between z-10">
                             From HOD Desk
                             <div className="w-2 h-2 rounded-full bg-white animate-pulse"></div>
                         </div>
@@ -181,7 +181,7 @@ const FacultySection = () => {
 
                             <Link
                                 to="/hod-desk"
-                                className="inline-block px-6 py-2.5 bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-400 hover:to-cyan-400 text-slate-900 dark:text-white font-semibold rounded-lg shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 transform hover:-translate-y-1 w-full text-center"
+                                className="inline-block px-6 py-2.5 bg-blue-600 hover:bg-blue-700 dark:bg-gradient-to-r dark:from-purple-600 dark:to-cyan-600 dark:hover:from-purple-500 dark:hover:to-cyan-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:-translate-y-1 w-full text-center"
                             >
                                 Read More
                             </Link>

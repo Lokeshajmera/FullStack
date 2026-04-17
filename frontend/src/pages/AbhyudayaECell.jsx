@@ -5,9 +5,9 @@ import abhyudayaLogo from '../assets/abhyudaya/abhyudaya.jpg';
 
 const AbhyudayaECell = () => {
     return (
-        <div className="bg-stone-50 dark:bg-slate-950 min-h-screen pt-24 pb-12 w-full text-slate-700 dark:text-slate-300">
+        <div className="bg-stone-50 dark:bg-slate-950 min-h-screen pb-12 w-full text-slate-700 dark:text-slate-300">
             {/* Page Header */}
-            <div className="text-center mb-6 pt-8 flex flex-col items-center">
+            <div className="text-center mb-6 flex flex-col items-center">
                 <img 
                     src={abhyudayaLogo} 
                     alt="Abhyudaya Logo" 

@@ -74,7 +74,7 @@ function App() {
             />
             <CustomCursor />
             <Navbar />
-            <main className="flex-grow z-10 relative pt-24">
+            <main className="flex-grow z-10 relative pt-32">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />

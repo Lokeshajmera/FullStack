@@ -3,1171 +3,565 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PCCOE AI & ML — Project Report</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <title>PCCOE AI & ML — FSDL Project Report</title>
   <style>
     /* ── RESET & BASE ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 10pt; }
+    html { font-size: 11pt; }
     body {
-      font-family: 'Inter', sans-serif;
-      background: #fff;
+      font-family: 'Times New Roman', Times, serif; /* Using a more academic font suitable for college reports */
+      background: #f1f5f9;
       color: #0f172a;
-      line-height: 1.6;
+      line-height: 1.5;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
     }
+
+    /* ── PRINT CONTROLS ── */
+    .print-controls {
+      text-align: center;
+      padding: 24px;
+      background: #ffffff;
+      border-bottom: 2px solid #e2e8f0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      font-family: Arial, sans-serif;
+    }
+    .print-controls h3 { margin-bottom: 12px; color: #0f172a; }
+    .print-btn {
+      padding: 12px 24px;
+      background: #0ea5e9;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(14, 165, 233, 0.3);
+      transition: background 0.2s;
+    }
+    .print-btn:hover { background: #0284c7; }
+    .print-tip { margin-top: 12px; font-size: 13px; color: #64748b; }
 
     /* ── PAGE LAYOUT ── */
     .page {
-      width: 210mm;
-      min-height: 297mm;
-      margin: 0 auto;
-      padding: 14mm 16mm 14mm 16mm;
-      position: relative;
+      max-width: 210mm;
+      margin: 0 auto 20px auto;
+      padding: 18mm;
+      background: #ffffff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
     }
 
-    /* ── COVER PAGE ── */
-    .cover {
-      background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 40%, #0c4a6e 100%);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 297mm;
-      padding: 16mm 18mm;
-      position: relative;
-      overflow: hidden;
+    /* ── HEADER TABLE (COVER PAGE) ── */
+    .header-table { width: 100%; border-collapse: collapse; border: 1px solid #1e293b; text-align: center; margin-bottom: 30px; }
+    .header-table td { border: 1px solid #1e293b; padding: 10px; }
+    .header-logo-placeholder {
+      width: 100px; height: 100px; border: 1px dashed #94a3b8;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: #64748b; font-size: 10pt; font-family: Arial, sans-serif;
     }
-    .cover::before {
-      content: '';
-      position: absolute;
-      top: -80px; right: -80px;
-      width: 380px; height: 380px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(6,182,212,0.18) 0%, transparent 70%);
-    }
-    .cover::after {
-      content: '';
-      position: absolute;
-      bottom: -60px; left: -60px;
-      width: 260px; height: 260px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%);
-    }
-    .cover-top { position: relative; z-index: 2; }
-    .cover-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(6,182,212,0.15);
-      border: 1px solid rgba(6,182,212,0.4);
-      border-radius: 50px;
-      padding: 5px 14px;
-      font-size: 8.5pt;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      color: #67e8f9;
-      margin-bottom: 24px;
-    }
-    .cover-badge span { width: 7px; height: 7px; border-radius: 50%; background: #06b6d4; display: inline-block; }
-    .cover-title {
-      font-size: 38pt;
-      font-weight: 900;
-      letter-spacing: -1.5px;
-      line-height: 1.1;
-      background: linear-gradient(135deg, #fff 30%, #67e8f9 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 8px;
-    }
-    .cover-subtitle {
-      font-size: 14pt;
-      font-weight: 400;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 28px;
-    }
-    .cover-tags {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      margin-bottom: 36px;
-    }
-    .cover-tag {
-      padding: 4px 12px;
-      border-radius: 4px;
-      font-size: 7.5pt;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-    }
-    .tag-blue   { background: rgba(6,182,212,0.2);  color: #67e8f9; border: 1px solid rgba(6,182,212,0.3); }
-    .tag-purple { background: rgba(139,92,246,0.2); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.3); }
-    .tag-green  { background: rgba(16,185,129,0.2); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
-    .tag-orange { background: rgba(249,115,22,0.2); color: #fdba74; border: 1px solid rgba(249,115,22,0.3); }
+    .inst-name { font-size: 16pt; font-weight: bold; color: #0f172a; margin: 4px 0; }
+    .inst-trust { font-size: 13pt; color: #1e293b; }
+    .inst-sub { font-size: 11pt; color: #334155; line-height: 1.4; margin-top: 6px; }
 
-    .cover-divider { height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.0), rgba(255,255,255,0.3), rgba(255,255,255,0.0)); margin: 24px 0; }
+    .cover-details h3 { font-size: 13pt; color: #0f172a; margin-bottom: 6px; margin-top: 24px; }
+    .cover-details ul, .cover-details ol { margin-left: 24px; font-size: 12pt; color: #0f172a; }
+    .cover-details li { margin-bottom: 4px; }
+    
+    .domain-url-area { display: flex; gap: 60px; margin-top: 40px; font-family: Arial, sans-serif; }
+    .du-title { font-size: 10pt; font-weight: bold; color: #0f172a; text-transform: uppercase; margin-bottom: 4px; }
+    .du-title.bg { background: #94a3b8; color: #ffffff; display: inline-block; padding: 2px 6px; }
+    .du-value { font-size: 11pt; color: #334155; }
 
-    .cover-meta-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 16px; margin-bottom: 32px;
+    /* ── REPORT CONTENT ── */
+    .report-body { font-family: Arial, Helvetica, sans-serif; }
+    .doc-header {
+      display: flex; justify-content: space-between; border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px; margin-top: 40px; margin-bottom: 20px;
     }
-    .cover-meta-item label {
-      font-size: 7pt; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: rgba(255,255,255,0.4);
-      display: block; margin-bottom: 4px;
-    }
-    .cover-meta-item span {
-      font-size: 9pt; font-weight: 500; color: rgba(255,255,255,0.85);
-    }
-
-    /* Phase indicator on cover */
-    .cover-phases {
-      display: flex; gap: 0;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-top: 6px;
-    }
-    .cover-phase {
-      flex: 1; padding: 10px 6px; text-align: center;
-      border-right: 1px solid rgba(255,255,255,0.1);
-    }
-    .cover-phase:last-child { border-right: none; }
-    .cover-phase .ph-num {
-      display: block;
-      width: 26px; height: 26px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #0ea5e9, #6366f1);
-      margin: 0 auto 5px;
-      line-height: 26px;
-      font-size: 9pt; font-weight: 800; color: #fff;
-    }
-    .cover-phase .ph-label {
-      font-size: 6.5pt; font-weight: 600;
-      color: rgba(255,255,255,0.55);
-      letter-spacing: 0.03em;
-    }
-
-    .cover-bottom { position: relative; z-index: 2; }
-    .cover-footer-line {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      border-top: 1px solid rgba(255,255,255,0.15);
-      padding-top: 16px;
-      font-size: 7.5pt;
-      color: rgba(255,255,255,0.4);
-    }
-    .cover-footer-line strong { color: rgba(255,255,255,0.7); font-weight: 600; }
-
-    /* ── TABLE OF CONTENTS ── */
-    .toc-page { padding-top: 20mm; }
-    .toc-header {
-      font-size: 24pt; font-weight: 900; letter-spacing: -1px;
-      color: #0f172a;
-      border-bottom: 3px solid #0ea5e9;
-      padding-bottom: 10px;
-      margin-bottom: 28px;
-    }
-    .toc-table { width: 100%; border-collapse: collapse; }
-    .toc-table thead tr { background: #0f172a; color: #fff; }
-    .toc-table thead th { padding: 10px 14px; font-size: 8.5pt; font-weight: 700; letter-spacing: 0.05em; text-align: left; }
-    .toc-table thead th:last-child { text-align: center; }
-    .toc-table tbody tr { border-bottom: 1px solid #e2e8f0; }
-    .toc-table tbody tr:hover { background: #f8fafc; }
-    .toc-table tbody td { padding: 10px 14px; }
-    .toc-table tbody td.num { font-weight: 800; font-size: 10pt; color: #0ea5e9; }
-    .toc-table tbody td.section-name { font-size: 9pt; font-weight: 600; color: #1e293b; }
-    .toc-table tbody td.section-sub { font-size: 8pt; font-weight: 400; color: #64748b; }
-    .toc-table tbody td.page-num { text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 8pt; font-weight: 700; color: #0f172a; }
-    .toc-phase-badge {
-      display: inline-block;
-      padding: 2px 9px; border-radius: 4px;
-      font-size: 7pt; font-weight: 700;
-      letter-spacing: 0.05em;
-      margin-bottom: 2px;
-    }
-
-    /* ── SECTION PAGES ── */
-    .section-page { padding-top: 16mm; }
-
-    /* Phase banner at top of each section */
+    .doc-title { font-size: 10pt; font-weight: bold; color: #64748b; text-transform: uppercase; }
+    .doc-phase { font-size: 10pt; font-weight: bold; color: #0ea5e9; }
+    
     .phase-banner {
-      display: flex; align-items: center; gap: 14px;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      color: #fff;
-      border-radius: 10px;
-      padding: 14px 20px;
-      margin-bottom: 22px;
+      display: flex; align-items: center; gap: 16px; background: #f8fafc;
+      border-left: 6px solid #0ea5e9; padding: 12px 20px; margin-bottom: 20px; border-radius: 0 8px 8px 0;
     }
-    .phase-num-circle {
-      width: 40px; height: 40px; flex-shrink: 0;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 15pt; font-weight: 900; color: #fff;
+    .phase-num {
+      width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: #0ea5e9;
+      display: flex; align-items: center; justify-content: center; font-size: 14pt; font-weight: bold; color: #fff;
     }
-    .phase-banner-text h2 { font-size: 15pt; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 2px; }
-    .phase-banner-text p { font-size: 8pt; color: rgba(255,255,255,0.6); font-weight: 400; }
+    .phase-banner h2 { font-size: 14pt; margin-bottom: 2px; color: #0f172a; }
+    .phase-banner p { font-size: 10pt; color: #64748b; margin-bottom: 0; }
 
-    /* Section heading */
-    .sec-heading {
-      font-size: 12pt; font-weight: 800; color: #0f172a;
-      border-left: 4px solid #0ea5e9;
-      padding-left: 10px;
-      margin-bottom: 14px;
-      margin-top: 22px;
-    }
-    .sec-heading:first-of-type { margin-top: 0; }
-
-    /* Sub-heading */
-    .sub-heading {
-      font-size: 9.5pt; font-weight: 700; color: #1e293b;
-      margin: 14px 0 8px 0;
-    }
+    .sec-heading { font-size: 13pt; font-weight: bold; color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 4px; margin: 24px 0 12px 0; }
+    .sub-heading { font-size: 11pt; font-weight: bold; color: #334155; margin: 16px 0 8px 0; }
+    
+    p { margin-bottom: 12px; color: #334155; font-size: 10.5pt; text-align: justify; }
+    ul.body-list, ol.body-list { margin-left: 24px; margin-bottom: 16px; color: #334155; font-size: 10.5pt; }
+    .body-list li { margin-bottom: 6px; }
 
     /* ── TABLES ── */
-    table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 8.5pt; }
-    table thead tr { background: #1e293b; color: #fff; }
-    table thead th { padding: 8px 12px; font-weight: 700; letter-spacing: 0.04em; text-align: left; }
-    table tbody tr { border-bottom: 1px solid #e2e8f0; }
-    table tbody tr:nth-child(even) { background: #f8fafc; }
-    table tbody td { padding: 8px 12px; color: #334155; vertical-align: top; }
-    table tbody td strong { color: #0f172a; }
+    .data-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 9.5pt; text-align: left; }
+    .data-table thead tr { background: #0f172a; color: #ffffff; }
+    .data-table thead th { padding: 8px 12px; font-weight: bold; border: 1px solid #334155; }
+    .data-table tbody tr { border-bottom: 1px solid #e2e8f0; }
+    .data-table tbody tr:nth-child(even) { background: #f8fafc; }
+    .data-table tbody td { padding: 8px 12px; border: 1px solid #e2e8f0; vertical-align: top; color: #1e293b; }
+    .data-table tbody td strong { color: #0ea5e9; }
 
-    /* ── CARDS / GRIDS ── */
-    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-    .info-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 12px 14px;
-    }
-    .info-card .ic-label { font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #94a3b8; margin-bottom: 4px; }
-    .info-card .ic-value { font-size: 9pt; font-weight: 600; color: #0f172a; }
-    .info-card .ic-sub   { font-size: 7.5pt; font-weight: 400; color: #64748b; margin-top: 2px; }
+    /* ── BADGES & CARDS ── */
+    .badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; text-align: center;}
+    .badge-high { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+    .badge-medium { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+    .badge-low { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+    .badge-pass { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
 
-    /* ── FLOWCHART (CSS-only) ── */
-    .flow { display: flex; flex-direction: column; align-items: center; gap: 0; margin: 10px 0 16px; }
+    /* ── FLOWCHARTS ── */
     .flow-box {
-      background: #f0f9ff;
-      border: 1.5px solid #bae6fd;
-      border-radius: 8px;
-      padding: 8px 24px;
-      font-size: 8.5pt; font-weight: 600; color: #0c4a6e;
-      text-align: center;
-      min-width: 260px;
-      max-width: 340px;
+      background: #f0f9ff; border: 2px solid #bae6fd; padding: 8px;
+      border-radius: 6px; text-align: center; font-size: 9.5pt; font-weight: bold; color: #0c4a6e;
+      margin: 0 auto; width: 60%;
     }
-    .flow-box.start-end {
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      border-color: #334155;
-      color: #fff;
-      border-radius: 50px;
-    }
-    .flow-box.decision {
-      background: #fefce8;
-      border-color: #fde047;
-      color: #713f12;
-      border-radius: 0;
-      transform: rotate(0deg);
-    }
-    .flow-arrow {
-      width: 2px; height: 16px;
-      background: #94a3b8;
-      position: relative;
-    }
-    .flow-arrow::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 50%;
-      transform: translateX(-50%);
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 6px solid #94a3b8;
-    }
-    .flow-caption { font-size: 7.5pt; font-style: italic; color: #64748b; margin-top: 6px; text-align: center; }
+    .flow-arrow { text-align: center; color: #94a3b8; font-size: 14pt; line-height: 1; margin: 2px 0; }
 
-    /* ── ARCHITECTURE BOXES ── */
-    .arch-stack { margin: 10px 0 16px; }
-    .arch-layer {
-      display: flex; align-items: center; gap: 14px;
-      padding: 10px 16px;
-      border-radius: 8px;
-      margin-bottom: 6px;
-    }
-    .arch-layer .layer-label {
-      font-size: 7pt; font-weight: 800; text-transform: uppercase;
-      letter-spacing: 0.1em; width: 120px; flex-shrink: 0;
-      color: rgba(255,255,255,0.85);
-    }
-    .arch-layer .layer-content { font-size: 8pt; font-weight: 500; color: rgba(255,255,255,0.8); }
-    .arch-layer.l1 { background: linear-gradient(135deg, #0369a1, #0284c7); }
-    .arch-layer.l2 { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
-    .arch-layer.l3 { background: linear-gradient(135deg, #059669, #047857); }
-    .arch-layer.l4 { background: linear-gradient(135deg, #b45309, #92400e); }
-
-    /* ── ER / DB ── */
-    .er-container { display: flex; gap: 16px; margin: 10px 0 16px; align-items: flex-start; }
-    .er-entity {
-      flex: 1;
-      border: 2px solid #0ea5e9;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .er-entity-title {
-      background: #0ea5e9; color: #fff;
-      font-size: 9pt; font-weight: 800;
-      padding: 7px 12px; text-align: center;
-    }
-    .er-fields { padding: 8px 10px; }
-    .er-field {
-      display: flex; justify-content: space-between;
-      font-size: 7.5pt; padding: 4px 0;
-      border-bottom: 1px solid #e2e8f0;
-      color: #334155;
-    }
-    .er-field:last-child { border-bottom: none; }
-    .er-field .fname { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #0f172a; }
-    .er-field .ftype { color: #0ea5e9; font-style: italic; }
-    .er-field .fkey  { color: #f59e0b; font-weight: 700; font-size: 7pt; }
-    .er-rel {
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; padding: 0 4px; font-size: 8pt;
-      font-weight: 700; color: #64748b; gap: 4px;
-    }
-
-    /* ── BADGES / STATUS CHIPS ── */
-    .badge {
-      display: inline-block; padding: 2px 8px; border-radius: 4px;
-      font-size: 7pt; font-weight: 700;
-    }
-    .badge-pass   { background: #d1fae5; color: #065f46; }
-    .badge-fail   { background: #fee2e2; color: #991b1b; }
-    .badge-done   { background: #dbeafe; color: #1e40af; }
-    .badge-high   { background: #fee2e2; color: #991b1b; }
-    .badge-medium { background: #fef3c7; color: #92400e; }
-    .badge-low    { background: #d1fae5; color: #065f46; }
-    .badge-yes    { background: #ede9fe; color: #5b21b6; }
-
-    /* ── CHECKLIST ── */
-    .checklist { list-style: none; margin: 6px 0 16px; }
-    .checklist li {
-      display: flex; align-items: flex-start; gap: 10px;
-      font-size: 8.5pt; padding: 6px 0;
-      border-bottom: 1px solid #f1f5f9;
-      color: #334155;
-    }
-    .checklist li:last-child { border-bottom: none; }
-    .checklist li .check-icon { font-size: 10pt; margin-top: 1px; }
-    .checklist li .check-num { font-weight: 800; color: #0ea5e9; font-size: 9pt; min-width: 20px; }
-    .checklist li .check-text strong { color: #0f172a; }
-
-    /* ── ENV TABLE ── */
-    .env-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
-    .env-table thead tr { background: #0f172a; }
-    .env-table thead th { padding: 8px 12px; font-size: 8pt; font-weight: 700; color: #fff; text-align: left; letter-spacing: 0.05em; }
-    .env-table tbody tr { border-bottom: 1px solid #e2e8f0; }
-    .env-table tbody td { padding: 8px 12px; font-size: 8.5pt; color: #334155; }
-    .env-table td.code { font-family: 'JetBrains Mono', monospace; font-size: 8pt; color: #7c3aed; font-weight: 600; }
-
-    /* ── PAGE HEADER/FOOTER ── */
-    .doc-header {
-      display: flex; justify-content: space-between; align-items: center;
-      border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 10px; margin-bottom: 18px;
-    }
-    .doc-header .doc-title { font-size: 8pt; font-weight: 700; color: #94a3b8; letter-spacing: 0.05em; text-transform: uppercase; }
-    .doc-header .doc-phase { font-size: 8pt; font-weight: 600; color: #0ea5e9; }
-    .doc-footer {
-      position: absolute; bottom: 10mm; left: 16mm; right: 16mm;
-      display: flex; justify-content: space-between; align-items: center;
-      border-top: 1px solid #e2e8f0;
-      padding-top: 6px;
-      font-size: 7pt; color: #94a3b8;
-    }
-
-    p { font-size: 9pt; color: #334155; margin-bottom: 10px; line-height: 1.65; }
-    ul.normal-list { padding-left: 18px; margin-bottom: 12px; }
-    ul.normal-list li { font-size: 8.5pt; color: #334155; margin-bottom: 4px; }
-    strong { color: #0f172a; }
-
-    /* ── PRINT ── */
+    /* ── PRINT MEDIA QUERY ── */
     @media print {
-      body { background: #fff; }
-      .page { break-after: page; margin: 0; width: 210mm; }
-      .cover { break-after: page; }
-      .no-break { break-inside: avoid; }
-      table { break-inside: auto; }
-      tr { break-inside: avoid; }
+      body { background: #ffffff; }
+      .print-controls { display: none !important; }
+      .page { 
+        box-shadow: none; 
+        margin: 0; 
+        max-width: 100%;
+        padding: 10mm;
+      }
+      .page-break { page-break-after: always; }
     }
-    @page { size: A4; margin: 0; }
   </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════
-     COVER PAGE
-══════════════════════════════════════════ -->
-<div class="page cover">
-  <div class="cover-top">
-    <div class="cover-badge"><span></span> COMPREHENSIVE SOFTWARE ENGINEERING PROJECT REPORT</div>
-    <div class="cover-title">PCCOE<br/>AI &amp; ML</div>
-    <div class="cover-subtitle">Department Website — Full-Stack Institutional Platform</div>
-    <div class="cover-tags">
-      <span class="cover-tag tag-blue">EdTech / Institutional</span>
-      <span class="cover-tag tag-purple">SaaS · Portal</span>
-      <span class="cover-tag tag-green">AI-Powered Study Tools</span>
-      <span class="cover-tag tag-orange">Full-Stack Web App</span>
-    </div>
-
-    <div class="cover-divider"></div>
-
-    <div class="cover-meta-grid">
-      <div class="cover-meta-item">
-        <label>Domain</label>
-        <span>EdTech / Academic Institutional Portal</span>
-      </div>
-      <div class="cover-meta-item">
-        <label>Live URL</label>
-        <span>pccoe-aiml.onrender.com</span>
-      </div>
-      <div class="cover-meta-item">
-        <label>Backend Stack</label>
-        <span>Node.js · Express.js · MongoDB · Groq API · Gemini API</span>
-      </div>
-      <div class="cover-meta-item">
-        <label>Frontend Stack</label>
-        <span>React.js · Vite · TailwindCSS · Framer Motion</span>
-      </div>
-      <div class="cover-meta-item">
-        <label>Database</label>
-        <span>MongoDB Atlas (Cloud) · Mongoose ODM</span>
-      </div>
-      <div class="cover-meta-item">
-        <label>Deployment</label>
-        <span>Render Platform · MongoDB Atlas</span>
-      </div>
-    </div>
-
-    <div class="cover-phases">
-      <div class="cover-phase"><span class="ph-num">1</span><span class="ph-label">Planning</span></div>
-      <div class="cover-phase"><span class="ph-num">2</span><span class="ph-label">Analysis</span></div>
-      <div class="cover-phase"><span class="ph-num">3</span><span class="ph-label">Design</span></div>
-      <div class="cover-phase"><span class="ph-num">4</span><span class="ph-label">Implement</span></div>
-      <div class="cover-phase"><span class="ph-num">5</span><span class="ph-label">Testing</span></div>
-      <div class="cover-phase"><span class="ph-num">6</span><span class="ph-label">Deployment</span></div>
-    </div>
+<!-- PRINT CONTROLS -->
+<div class="print-controls">
+  <h3>Print / Download Project Report</h3>
+  <p style="margin-bottom: 16px; color: #475569;">This report includes all teacher-required documentation phases in a continuous layout.</p>
+  <button class="print-btn" onclick="window.print()">Print or Save as PDF</button>
+  <div class="print-tip">
+    <strong>Important:</strong> When printing, set <strong>Margins</strong> to "None" and check <strong>Background graphics</strong>.
   </div>
+</div>
 
-  <div class="cover-bottom">
-    <div class="cover-footer-line">
+<div class="page">
+  
+  <!-- ======================= 1ST PAGE (COVER) ======================= -->
+  <table class="header-table">
+    <tr>
+      <td style="width: 18%;">
+        <div class="header-logo-placeholder">Logo<br>Here</div>
+      </td>
+      <td style="width: 64%;">
+        <div class="inst-trust">PIMPRI CHINCHWAD EDUCATION TRUST'S</div>
+        <div class="inst-name">PIMPRI CHINCHWAD COLLEGE OF ENGINEERING</div>
+        <div class="inst-sub">
+          NBA <span style="text-decoration: underline;">Accredited |</span> NAAC Accredited with 'A' Grade | An Autonomous<br/>
+          Institute |AICTE Approved | ISO Certified | Permanently Affiliated to SPPU,<br/>
+          Pune
+        </div>
+      </td>
+      <td style="width: 18%;">
+        <div class="header-logo-placeholder">Logo<br>Here</div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" style="background: #e2e8f0; font-size: 14pt; font-weight: bold; color: #0f172a; padding: 10px;">
+        FSDL PROJECT REPORT
+      </td>
+    </tr>
+  </table>
+
+  <div class="cover-details">
+    <h3>Department Details</h3>
+    <ul style="list-style-type: disc;">
+      <li><strong>Department Name:</strong> CSE (Artificial Intelligence &amp; Machine Learning)</li>
+      <li><strong>Course Name:</strong> FSD1 (Full Stack Development 1)</li>
+    </ul>
+
+    <h3>Project Information</h3>
+    <ul style="list-style-type: disc;">
+      <li>
+        <strong>Project Title:</strong><br/>
+        CSE (AIML) Department Website
+      </li>
+    </ul>
+
+    <h3>Group Members</h3>
+    <ol>
+      <li><strong>Lokesh Ajmera</strong> &ndash; 124B1C006</li>
+      <li><strong>Isha Thakur</strong> &ndash; 124B1C006</li>
+      <li><strong>Pratham Bokefode</strong> &ndash; 124B1C016</li>
+      <li><strong>Shamal Dighole</strong> &ndash; 124B1C020</li>
+    </ol>
+
+    <h3>Mentor Details</h3>
+    <ul style="list-style-type: disc;">
+      <li><strong>Mentor Name:</strong> Dr. Anuradha Thakare</li>
+    </ul>
+
+    <div class="domain-url-area">
       <div>
-        <strong>Institute:</strong> Pimpri Chinchwad College of Engineering (PCCOE)<br/>
-        <strong>Department:</strong> Computer Science &amp; Engineering (AI &amp; ML)
+        <div class="du-title">DOMAIN</div>
+        <div class="du-value">EdTech / Institutional Portal</div>
       </div>
-      <div style="text-align:right;">
-        <strong>Academic Year:</strong> 2025–2026<br/>
-        <span>Report Generated: April 2026</span>
+      <div>
+        <div class="du-title bg">LIVE URL</div>
+        <div class="du-value">pccoe-aiml.vercel.app</div>
+      </div>
+      <div>
+        <div class="du-title bg" style="background: #475569;">API URL</div>
+        <div class="du-value">pccoe-aiml.onrender.com</div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ══════════════════════════════════════════
-     TABLE OF CONTENTS
-══════════════════════════════════════════ -->
-<div class="page toc-page">
-  <div class="doc-header">
-    <span class="doc-title">PCCOE AI &amp; ML Department Website</span>
-    <span class="doc-phase">Table of Contents</span>
-  </div>
+  <div class="page-break"></div>
 
-  <div class="toc-header">Table of Contents</div>
+  <!-- ======================= REPORT BODY CONTINUOUS FLOW ======================= -->
+  <div class="report-body">
+    
+    <!-- TABLE OF CONTENTS -->
+    <div class="doc-header" style="margin-top: 0;">
+      <span class="doc-title">PCCOE AI &amp; ML Department Website</span>
+      <span class="doc-phase">Table of Contents</span>
+    </div>
 
-  <table class="toc-table">
-    <thead>
-      <tr>
-        <th style="width:40px;">#</th>
-        <th>Section</th>
-        <th style="width:60px; text-align:center;">Page</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="num">1</td>
-        <td>
-          <span class="toc-phase-badge tag-blue" style="background:#dbeafe;color:#1e40af;">Phase 1</span><br/>
-          <span class="section-name">Planning Phase</span><br/>
-          <span class="section-sub">Statement of Work · Resource Plan · Risk Management Plan</span>
-        </td>
-        <td class="page-num">3</td>
-      </tr>
-      <tr>
-        <td class="num">2</td>
-        <td>
-          <span class="toc-phase-badge" style="background:#d1fae5;color:#065f46;">Phase 2</span><br/>
-          <span class="section-name">Requirements Analysis</span><br/>
-          <span class="section-sub">SRS · HLD · LLD · Use Case · Acceptance Criteria</span>
-        </td>
-        <td class="page-num">5</td>
-      </tr>
-      <tr>
-        <td class="num">3</td>
-        <td>
-          <span class="toc-phase-badge" style="background:#ede9fe;color:#5b21b6;">Phase 3</span><br/>
-          <span class="section-name">Design Phase</span><br/>
-          <span class="section-sub">System Architecture · DB Design · SDD · API Endpoints</span>
-        </td>
-        <td class="page-num">7</td>
-      </tr>
-      <tr>
-        <td class="num">4</td>
-        <td>
-          <span class="toc-phase-badge" style="background:#fef3c7;color:#92400e;">Phase 4</span><br/>
-          <span class="section-name">Implementation Phase</span><br/>
-          <span class="section-sub">Code Highlights · Key Libraries · API Documentation</span>
-        </td>
-        <td class="page-num">9</td>
-      </tr>
-      <tr>
-        <td class="num">5</td>
-        <td>
-          <span class="toc-phase-badge" style="background:#fee2e2;color:#991b1b;">Phase 5</span><br/>
-          <span class="section-name">Testing Phase</span><br/>
-          <span class="section-sub">Test Plan · Test Cases · Bug Reports</span>
-        </td>
-        <td class="page-num">11</td>
-      </tr>
-      <tr>
-        <td class="num">6</td>
-        <td>
-          <span class="toc-phase-badge" style="background:#fce7f3;color:#9d174d;">Phase 6</span><br/>
-          <span class="section-name">Deployment Phase</span><br/>
-          <span class="section-sub">Release Notes · User Manual · Installation Guide · Checklist</span>
-        </td>
-        <td class="page-num">13</td>
-      </tr>
-    </tbody>
-  </table>
+    <h2 style="font-size: 18pt; margin-bottom: 20px; color: #0f172a; border-bottom: 2px solid #0ea5e9; padding-bottom: 8px;">Table of Contents</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 50px;">#</th>
+          <th>Phase / Section Title &amp; Contents</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight: bold; font-size:11pt; color:#0ea5e9;">1</td>
+          <td><strong>Phase 1: Planning Phase</strong><br/><span style="color: #64748b;">Statement of Work · Resource Plan · Risk Management Plan</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; font-size:11pt; color:#0ea5e9;">2</td>
+          <td><strong>Phase 2: Requirements Analysis</strong><br/><span style="color: #64748b;">SRS · HLD · LLD · Use Case · Acceptance Criteria</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; font-size:11pt; color:#0ea5e9;">3</td>
+          <td><strong>Phase 3: Design Phase</strong><br/><span style="color: #64748b;">System Architecture · DB Design · SDD · API Endpoints</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; font-size:11pt; color:#0ea5e9;">4</td>
+          <td><strong>Phase 4: Implementation Phase</strong><br/><span style="color: #64748b;">Code Highlights · Key Libraries · API Documentation</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; font-size:11pt; color:#0ea5e9;">5</td>
+          <td><strong>Phase 5: Testing Phase</strong><br/><span style="color: #64748b;">Test Plan · Test Cases · Bug Reports</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; font-size:11pt; color:#0ea5e9;">6</td>
+          <td><strong>Phase 6: Deployment Phase</strong><br/><span style="color: #64748b;">Release Notes · User Manual · Installation Guide · Checklist</span></td>
+        </tr>
+      </tbody>
+    </table>
 
-  <div style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:8px; padding:14px 16px; margin-top:24px;">
-    <p style="margin:0; font-size:8.5pt; color:#0c4a6e; font-weight:600;">🏛️ About This Project</p>
-    <p style="margin:6px 0 0; font-size:8pt; color:#0369a1; line-height:1.6;">
-      The PCCOE AI &amp; ML Department Website is a full-stack institutional web platform built for the Department of
-      Computer Science &amp; Engineering (AI &amp; ML) at Pimpri Chinchwad College of Engineering. The platform provides
-      comprehensive departmental information, AI-powered academic tools including a PDF summarizer and AI tutor,
-      a Teacher Portal with dashboard, student chapter showcases, research publication databases, and dynamic
-      announcement boards — all driven by a React SPA frontend backed by a Node.js/Express REST API and MongoDB Atlas.
+    <!-- PHASE 1: PLANNING -->
+    <div class="doc-header">
+      <span class="doc-title">PCCOE AI &amp; ML Department Website</span>
+      <span class="doc-phase">Phase 1 — Planning</span>
+    </div>
+    <div class="phase-banner">
+      <div class="phase-num">1</div>
+      <div>
+        <h2>Planning Phase</h2>
+        <p>Statement of Work (SOW) · Resource Plan · Risk Management Plan</p>
+      </div>
+    </div>
+    <div class="sec-heading">1.1 Statement of Work (SOW)</div>
+    <p>
+      The objective of this project is to design, develop, and deploy a fully-featured departmental website for the AI &amp; ML
+      department at PCCOE. The platform targets students, faculty, and administrative staff. It delivers structured academic
+      content, interactive student chapter pages, research &amp; publication data, a secured Teacher Portal, and an AI-powered
+      study assistance tool (PDF Summarizer) — all within a responsive, accessible, and visually modern interface.
     </p>
-  </div>
 
-  <div class="doc-footer">
-    <span>PCCOE AI &amp; ML Department Website — Project Report</span>
-    <span>Page 2 / 15</span>
-  </div>
-</div>
+    <div class="sub-heading">Scope Overview</div>
+    <table class="data-table">
+      <thead><tr><th>Layer</th><th>Components</th><th>Technology</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Frontend UI</strong></td><td>React SPA, design system, theme switching, Framer Motion</td><td>React.js · Vite · TailwindCSS</td></tr>
+        <tr><td><strong>Backend APIs</strong></td><td>Faculty CRUD, Notice board, Contact form, AI endpoints</td><td>Node.js · Express.js</td></tr>
+        <tr><td><strong>Database</strong></td><td>Faculty profiles, Student records, Notice board, Contacts</td><td>MongoDB · Mongoose · Atlas</td></tr>
+        <tr><td><strong>AI Integration</strong></td><td>PDF lecture summarizer utilizing Groq LLaMA processing</td><td>Groq API (LLaMA 3.3)</td></tr>
+        <tr><td><strong>Auth System</strong></td><td>Teacher Login safely storing browser JWT contexts</td><td>JWT · React Context API</td></tr>
+        <tr><td><strong>Hosting</strong></td><td>Frontend on Vercel; Backend APIs on Render</td><td>Vercel · Render · Atlas</td></tr>
+      </tbody>
+    </table>
 
-<!-- ══════════════════════════════════════════
-     PHASE 1 — PLANNING
-══════════════════════════════════════════ -->
-<div class="page section-page">
-  <div class="doc-header">
-    <span class="doc-title">PCCOE AI &amp; ML Department Website</span>
-    <span class="doc-phase">Phase 1 — Planning</span>
-  </div>
+    <div class="sec-heading">1.2 Resource Plan</div>
+    <table class="data-table">
+      <tbody>
+        <tr><td><strong>Development Model</strong></td><td>Full-Stack Solo + Team (Frontend React + Backend Node.js)</td></tr>
+        <tr><td><strong>Frontend Framework</strong></td><td>React.js + Vite, TailwindCSS, Framer Motion, React Router v6</td></tr>
+        <tr><td><strong>Backend Runtime</strong></td><td>Node.js + Express.js, REST API, Multer, pdf-parse</td></tr>
+        <tr><td><strong>Database Environment</strong></td><td>MongoDB Atlas Cloud, Mongoose ODM</td></tr>
+        <tr><td><strong>AI Services</strong></td><td>Groq API (LLaMA 3.3-70B model)</td></tr>
+        <tr><td><strong>CI/CD & Hosting</strong></td><td>Vercel (UI) and Render (API), connected to GitHub Repository</td></tr>
+      </tbody>
+    </table>
 
-  <div class="phase-banner">
-    <div class="phase-num-circle" style="background:linear-gradient(135deg,#0ea5e9,#6366f1);">1</div>
-    <div class="phase-banner-text">
-      <h2>Planning Phase</h2>
-      <p>Statement of Work (SOW) &nbsp;·&nbsp; Resource Plan &nbsp;·&nbsp; Risk Management Plan</p>
+    <div class="sec-heading">1.3 Risk Management Plan</div>
+    <table class="data-table">
+      <thead><tr><th>Risk Description</th><th>Likelihood</th><th>Impact</th><th>Mitigation Strategy</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Groq API limit causing AI feature failure</strong></td>
+          <td><span class="badge badge-medium">Medium</span></td>
+          <td><span class="badge badge-high">High</span></td>
+          <td>Try-catch blocks on all AI routes; gracefully show user-friendly error messages when rate limits hit.</td>
+        </tr>
+        <tr>
+          <td><strong>MongoDB Atlas connection failure to Render</strong></td>
+          <td><span class="badge badge-low">Low</span></td>
+          <td><span class="badge badge-high">High</span></td>
+          <td>Environment variables configured securely; Atlas IP whitelist set to 0.0.0.0/0; Mongoose reconnect logic.</td>
+        </tr>
+        <tr>
+          <td><strong>Parsing failure for large uploaded PDF files</strong></td>
+          <td><span class="badge badge-medium">Medium</span></td>
+          <td><span class="badge badge-medium">Medium</span></td>
+          <td>Memory-based Multer storage limits I/O; chunk-based text processing prior to LLM submission.</td>
+        </tr>
+        <tr>
+          <td><strong>Free-tier backend cold starts causing slow APIs</strong></td>
+          <td><span class="badge badge-high">High</span></td>
+          <td><span class="badge badge-medium">Medium</span></td>
+          <td>Health-check standard endpoint maintained. Frontend deployed dynamically on Vercel ensuring UI remains fast.</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <!-- PHASE 2: REQUIREMENTS ANALYSIS -->
+    <div class="doc-header">
+      <span class="doc-title">PCCOE AI &amp; ML Department Website</span>
+      <span class="doc-phase">Phase 2 — Requirements Analysis</span>
     </div>
-  </div>
-
-  <div class="sec-heading">1.1 Statement of Work (SOW)</div>
-  <p>
-    The objective of this project is to design, develop, and deploy a fully-featured departmental website for the AI &amp; ML
-    department at PCCOE. The platform targets students, faculty, and administrative staff. It delivers structured academic
-    content, interactive student chapter pages, research &amp; publication data, a secured Teacher Portal, and AI-powered
-    study assistance tools — all within a responsive, accessible, and visually modern interface.
-  </p>
-
-  <div class="sub-heading">Scope Overview</div>
-  <table>
-    <thead><tr><th>Layer</th><th>Components</th><th>Technology</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Frontend UI</strong></td><td>48-page React SPA, glassmorphism design, dark/light theme, Framer Motion animations, custom cursor</td><td>React.js · Vite · TailwindCSS</td></tr>
-      <tr><td><strong>Backend APIs</strong></td><td>Faculty CRUD, Notice board, Contact form, Student management, AI summarization &amp; tutor endpoints</td><td>Node.js · Express.js</td></tr>
-      <tr><td><strong>Database</strong></td><td>Faculty profiles, Student records, Notice board, Contact messages — all persisted in Atlas</td><td>MongoDB · Mongoose · Atlas</td></tr>
-      <tr><td><strong>AI Integration</strong></td><td>PDF lecture summarizer (Groq LLaMA), AI Tutor Q&amp;A (Gemini 1.5 Flash), PYQ topic analysis engine</td><td>Groq API · Gemini API</td></tr>
-      <tr><td><strong>Auth System</strong></td><td>Teacher Login with JWT, protected dashboard route, AuthContext state management</td><td>JWT · React Context API</td></tr>
-      <tr><td><strong>Hosting</strong></td><td>Full-stack deployment on Render; MongoDB Atlas cloud DB</td><td>Render · Atlas</td></tr>
-    </tbody>
-  </table>
-
-  <div class="sec-heading">1.2 Resource Plan</div>
-  <div class="info-grid">
-    <div class="info-card"><div class="ic-label">Development Model</div><div class="ic-value">Full-Stack Solo + Team</div><div class="ic-sub">Frontend React + Backend Node.js</div></div>
-    <div class="info-card"><div class="ic-label">Frontend Framework</div><div class="ic-value">React.js + Vite</div><div class="ic-sub">TailwindCSS · Framer Motion · React Router v6</div></div>
-    <div class="info-card"><div class="ic-label">Backend Runtime</div><div class="ic-value">Node.js + Express.js</div><div class="ic-sub">REST API · Multer · pdf-parse</div></div>
-    <div class="info-card"><div class="ic-label">Database</div><div class="ic-value">MongoDB Atlas</div><div class="ic-sub">Mongoose ODM · 4 Collections</div></div>
-    <div class="info-card"><div class="ic-label">AI Services</div><div class="ic-value">Groq API + Gemini API</div><div class="ic-sub">LLaMA 3.3-70B · Gemini 1.5 Flash</div></div>
-    <div class="info-card"><div class="ic-label">Hosting / CI-CD</div><div class="ic-value">Render Platform</div><div class="ic-sub">Auto-deploy from Git · MongoDB Atlas</div></div>
-  </div>
-
-  <div class="sec-heading">1.3 Risk Management Plan</div>
-  <table>
-    <thead><tr><th>Risk ID</th><th>Risk Description</th><th>Likelihood</th><th>Impact</th><th>Mitigation Strategy</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><strong>R-01</strong></td>
-        <td>Groq / Gemini API rate limits or outages causing AI feature failure</td>
-        <td><span class="badge badge-medium">Medium</span></td>
-        <td><span class="badge badge-high">High</span></td>
-        <td>Mock fallback responses when API key absent; try-catch on all AI routes; user-friendly error messages</td>
-      </tr>
-      <tr>
-        <td><strong>R-02</strong></td>
-        <td>MongoDB Atlas connection failure on Render cloud deployment</td>
-        <td><span class="badge badge-low">Low</span></td>
-        <td><span class="badge badge-high">High</span></td>
-        <td>MONGO_URI from Render env vars; Atlas IP whitelist set to 0.0.0.0/0; Mongoose reconnect logic</td>
-      </tr>
-      <tr>
-        <td><strong>R-03</strong></td>
-        <td>PDF parsing failure for corrupted or large uploaded files</td>
-        <td><span class="badge badge-medium">Medium</span></td>
-        <td><span class="badge badge-medium">Medium</span></td>
-        <td>pdf-parse with try-catch; memory-based Multer storage; chunk-based processing (45 000 char chunks)</td>
-      </tr>
-      <tr>
-        <td><strong>R-04</strong></td>
-        <td>Render free-tier cold starts causing slow initial page loads</td>
-        <td><span class="badge badge-high">High</span></td>
-        <td><span class="badge badge-medium">Medium</span></td>
-        <td>Health-check GET / endpoint kept active; static assets served from Vite build; CDN fonts preloaded</td>
-      </tr>
-      <tr>
-        <td><strong>R-05</strong></td>
-        <td>JWT token expiry causing teacher session loss mid-dashboard use</td>
-        <td><span class="badge badge-low">Low</span></td>
-        <td><span class="badge badge-medium">Medium</span></td>
-        <td>AuthContext with localStorage persistence; ProtectedRoute component auto-redirects to /teacher-login</td>
-      </tr>
-      <tr>
-        <td><strong>R-06</strong></td>
-        <td>Cross-origin (CORS) errors between frontend and backend on production</td>
-        <td><span class="badge badge-medium">Medium</span></td>
-        <td><span class="badge badge-high">High</span></td>
-        <td>CORS middleware (cors npm) applied globally on all routes; Vite proxy configured for local dev</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="doc-footer">
-    <span>PCCOE AI &amp; ML Department Website — Project Report</span>
-    <span>Page 3 / 15</span>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     PHASE 2 — REQUIREMENTS ANALYSIS
-══════════════════════════════════════════ -->
-<div class="page section-page">
-  <div class="doc-header">
-    <span class="doc-title">PCCOE AI &amp; ML Department Website</span>
-    <span class="doc-phase">Phase 2 — Requirements Analysis</span>
-  </div>
-
-  <div class="phase-banner">
-    <div class="phase-num-circle" style="background:linear-gradient(135deg,#10b981,#059669);">2</div>
-    <div class="phase-banner-text">
-      <h2>Requirements Analysis</h2>
-      <p>Software Requirement Specification (SRS) &nbsp;·&nbsp; HLD &nbsp;·&nbsp; LLD &nbsp;·&nbsp; Use Case Documents &nbsp;·&nbsp; Acceptance Criteria</p>
-    </div>
-  </div>
-
-  <div class="sec-heading">2.1 Software Requirements Specification (SRS)</div>
-  <div class="sub-heading">Core Functional Requirements</div>
-  <table>
-    <thead><tr><th>Req ID</th><th>Feature</th><th>Description</th><th>Priority</th></tr></thead>
-    <tbody>
-      <tr><td><strong>FR-01</strong></td><td>Teacher Authentication</td><td>Secure teacher login with JWT; ProtectedRoute guards the dashboard</td><td><span class="badge badge-high">High</span></td></tr>
-      <tr><td><strong>FR-02</strong></td><td>Teacher Dashboard</td><td>CRUD for faculty, notices, and student records; stats overview panel</td><td><span class="badge badge-high">High</span></td></tr>
-      <tr><td><strong>FR-03</strong></td><td>Faculty Directory</td><td>Display faculty with qualification, designation, Scopus, Google Scholar links from MongoDB</td><td><span class="badge badge-high">High</span></td></tr>
-      <tr><td><strong>FR-04</strong></td><td>Notice Board</td><td>Dynamic notice listing fetched from backend; timestamped; links to PDF or external URLs</td><td><span class="badge badge-high">High</span></td></tr>
-      <tr><td><strong>FR-05</strong></td><td>AI PDF Summarizer</td><td>Upload lecture PDF → Groq LLaMA 3.3-70B generates structured exam-ready study guide in JSON</td><td><span class="badge badge-high">High</span></td></tr>
-      <tr><td><strong>FR-06</strong></td><td>AI Tutor Q&amp;A</td><td>Ask questions with/without PDF context → Gemini 1.5 Flash returns markdown-formatted answer</td><td><span class="badge badge-high">High</span></td></tr>
-      <tr><td><strong>FR-07</strong></td><td>PYQ Topic Analyzer</td><td>Select subject (ML/DL) → get frequency-ranked previous year question topics</td><td><span class="badge badge-medium">Medium</span></td></tr>
-      <tr><td><strong>FR-08</strong></td><td>Contact Form</td><td>Visitor submits name, email, subject, message → persisted to MongoDB Contact collection</td><td><span class="badge badge-medium">Medium</span></td></tr>
-      <tr><td><strong>FR-09</strong></td><td>Student Chapters (6+)</td><td>Dedicated pages for AiMSA, AAAI, IEEE-CS, IEEE-CIS, GfG, INNS, Abhyudaya E-Cell</td><td><span class="badge badge-medium">Medium</span></td></tr>
-      <tr><td><strong>FR-10</strong></td><td>Dark / Light Theme</td><td>System-wide toggle persisted via ThemeContext; all components respond to theme variable</td><td><span class="badge badge-medium">Medium</span></td></tr>
-      <tr><td><strong>FR-11</strong></td><td>Research &amp; Publications</td><td>Pages for research publications, book chapters, IPR, fundings, consultancy displayed from data files</td><td><span class="badge badge-medium">Medium</span></td></tr>
-      <tr><td><strong>FR-12</strong></td><td>Placements &amp; Internships</td><td>Interactive placement stats, company logos, student testimonials; internship listings</td><td><span class="badge badge-low">Low</span></td></tr>
-    </tbody>
-  </table>
-
-  <div class="sub-heading">Non-Functional Requirements</div>
-  <ul class="normal-list">
-    <li><strong>Performance:</strong> Page load &lt; 3 seconds on standard connection; Vite code-splitting applied; Google Fonts preloaded.</li>
-    <li><strong>Security:</strong> JWT-signed tokens; bcryptjs password hashing; dotenv-based secret management; no plaintext credentials in codebase.</li>
-    <li><strong>Scalability:</strong> MongoDB Atlas scales horizontally; Express routes modularized per domain (5 route modules).</li>
-    <li><strong>Accessibility:</strong> Semantic HTML5; ARIA roles on interactive elements; keyboard-navigable Navbar; high-contrast theme support.</li>
-    <li><strong>Responsiveness:</strong> TailwindCSS breakpoints; mobile-first layout; all 48 pages tested at 375 px, 768 px, and 1440 px viewports.</li>
-  </ul>
-
-  <div class="sec-heading">2.2 High-Level Design (HLD) — User Authentication Flow</div>
-  <div class="flow">
-    <div class="flow-box start-end">START: Teacher visits /teacher-login</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">Submits username + password via Login Form</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">POST /api/auth/login → Backend validates credentials</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box decision">Credentials valid? (bcryptjs hash compare)</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">Generate JWT Token → return to frontend</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">AuthContext stores token; localStorage persists session</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">ProtectedRoute allows access to /teacher-dashboard</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box start-end">END: Teacher Dashboard Active</div>
-    <div class="flow-caption">Figure 1: Teacher Authentication &amp; Session Flow (JWT-based)</div>
-  </div>
-
-  <div class="sec-heading">2.3 Acceptance Criteria</div>
-  <table>
-    <thead><tr><th>AC ID</th><th>Criterion</th><th>Status</th></tr></thead>
-    <tbody>
-      <tr><td><strong>AC-01</strong></td><td>Teacher can login, access protected dashboard, and session persists on page reload via localStorage</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>AC-02</strong></td><td>PDF upload to /api/ai/summarize returns structured JSON study guide within 30 seconds</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>AC-03</strong></td><td>AI Tutor /api/ai/ask responds accurately with context from uploaded lecture notes</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>AC-04</strong></td><td>Contact form submission persists to MongoDB and returns 201 success response</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>AC-05</strong></td><td>All 48 React Router routes render without blank-page or 404 errors</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>AC-06</strong></td><td>Dark/Light theme toggle persists across navigation and page reload</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>AC-07</strong></td><td>Unauthorized access to /teacher-dashboard redirects to /teacher-login</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>AC-08</strong></td><td>Faculty CRUD in Teacher Dashboard correctly creates, updates, and deletes MongoDB records</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-    </tbody>
-  </table>
-
-  <div class="doc-footer">
-    <span>PCCOE AI &amp; ML Department Website — Project Report</span>
-    <span>Page 5 / 15</span>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     PHASE 3 — DESIGN
-══════════════════════════════════════════ -->
-<div class="page section-page">
-  <div class="doc-header">
-    <span class="doc-title">PCCOE AI &amp; ML Department Website</span>
-    <span class="doc-phase">Phase 3 — Design</span>
-  </div>
-
-  <div class="phase-banner">
-    <div class="phase-num-circle" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">3</div>
-    <div class="phase-banner-text">
-      <h2>Design Phase</h2>
-      <p>Software Design Description (SDD) &nbsp;·&nbsp; System Architecture &nbsp;·&nbsp; Database Design &nbsp;·&nbsp; API Endpoint Design</p>
-    </div>
-  </div>
-
-  <div class="sec-heading">3.1 System Architecture Diagram</div>
-  <div class="arch-stack">
-    <div class="arch-layer l1">
-      <div class="layer-label">Presentation Layer</div>
-      <div class="layer-content">React.js (Vite) · TailwindCSS · Framer Motion · Custom Cursor · Glassmorphism UI · ThemeContext · AuthContext · React Router v6 (48 Routes)</div>
-    </div>
-    <div class="arch-layer l2">
-      <div class="layer-label">Application Logic</div>
-      <div class="layer-content">Node.js · Express.js · JWT Middleware · Multer (file uploads) · CORS · pdf-parse · asyncHandler · 5 Route Modules</div>
-    </div>
-    <div class="arch-layer l3">
-      <div class="layer-label">AI Services Layer</div>
-      <div class="layer-content">Groq API (LLaMA 3.3-70B) → PDF Summarizer &amp; PYQ Analyzer · Google Gemini 1.5 Flash → AI Tutor Q&amp;A · Chunked text processing (45 000 chars)</div>
-    </div>
-    <div class="arch-layer l4">
-      <div class="layer-label">Data Layer</div>
-      <div class="layer-content">MongoDB Atlas · Mongoose ODM · 4 Collections: Faculty · Student · Notice · Contact · Cloud-hosted with automated backups</div>
-    </div>
-  </div>
-  <p style="font-size:7.5pt; color:#64748b; font-style:italic; text-align:center; margin-top:-8px;">
-    Figure 1: PCCOE AI &amp; ML Website — 4-Tier System Architecture
-  </p>
-
-  <p>The platform adopts a <strong>Monolithic 4-Tier Architecture</strong> deployed on Render. The Presentation Layer is a
-  React SPA built with Vite. The Application Logic Layer is a Node.js/Express server handling REST API calls
-  asynchronously via HTTPS. An independent AI Services Layer proxies requests to Groq and Gemini APIs with chunking.
-  The Data Layer is a MongoDB NoSQL database on Atlas.</p>
-
-  <div class="sec-heading">3.2 Database Design (Entity-Relationship Diagram)</div>
-  <div class="er-container">
-    <div class="er-entity">
-      <div class="er-entity-title">Faculty</div>
-      <div class="er-fields">
-        <div class="er-field"><span class="fname">_id</span><span class="ftype">ObjectId</span><span class="fkey">PK</span></div>
-        <div class="er-field"><span class="fname">name</span><span class="ftype">String (req)</span></div>
-        <div class="er-field"><span class="fname">designation</span><span class="ftype">String (req)</span></div>
-        <div class="er-field"><span class="fname">qualification</span><span class="ftype">String (req)</span></div>
-        <div class="er-field"><span class="fname">image</span><span class="ftype">String (URL)</span></div>
-        <div class="er-field"><span class="fname">email</span><span class="ftype">String</span></div>
-        <div class="er-field"><span class="fname">areaOfInterest</span><span class="ftype">String</span></div>
-        <div class="er-field"><span class="fname">experience</span><span class="ftype">String</span></div>
-        <div class="er-field"><span class="fname">linkedin</span><span class="ftype">String (URL)</span></div>
-        <div class="er-field"><span class="fname">scopus</span><span class="ftype">String</span></div>
-        <div class="er-field"><span class="fname">googleScholar</span><span class="ftype">String</span></div>
-        <div class="er-field"><span class="fname">wos</span><span class="ftype">String</span></div>
+    <div class="phase-banner" style="border-color: #10b981;">
+      <div class="phase-num" style="background: #10b981;">2</div>
+      <div>
+        <h2>Requirements Analysis</h2>
+        <p>Software Requirement Specification (SRS) · HLD · LLD · Use Case · Acceptance Criteria</p>
       </div>
     </div>
-    <div class="er-rel">manages<br/>↕</div>
-    <div class="er-entity">
-      <div class="er-entity-title">Student</div>
-      <div class="er-fields">
-        <div class="er-field"><span class="fname">_id</span><span class="ftype">ObjectId</span><span class="fkey">PK</span></div>
-        <div class="er-field"><span class="fname">name</span><span class="ftype">String (req)</span></div>
-        <div class="er-field"><span class="fname">role</span><span class="ftype">String (req)</span></div>
-        <div class="er-field"><span class="fname">department</span><span class="ftype">String</span></div>
-        <div class="er-field"><span class="fname">image</span><span class="ftype">String (URL)</span></div>
-        <div class="er-field"><span class="fname">linkedin</span><span class="ftype">String</span></div>
-        <div class="er-field"><span class="fname">email</span><span class="ftype">String</span></div>
+    <div class="sec-heading">2.1 Software Requirements Specification (SRS)</div>
+    <div class="sub-heading">Functional Requirements</div>
+    <table class="data-table">
+      <thead><tr><th>Feature</th><th>Description</th><th>Priority</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Teacher Auth</strong></td><td>Secure teacher login with JWT; ProtectedRoute guards the dashboard</td><td><span class="badge badge-high">High</span></td></tr>
+        <tr><td><strong>Teacher Dashboard</strong></td><td>CRUD for faculty, notices, and student records; stats overview panel</td><td><span class="badge badge-high">High</span></td></tr>
+        <tr><td><strong>Faculty Directory</strong></td><td>Display faculty with qualification, designation, Scopus links</td><td><span class="badge badge-high">High</span></td></tr>
+        <tr><td><strong>Notice Board</strong></td><td>Dynamic notice listing; timestamped; links to PDF or external URLs</td><td><span class="badge badge-high">High</span></td></tr>
+        <tr><td><strong>AI PDF Summarizer</strong></td><td>Upload lecture PDF → Groq generates structured JSON guide</td><td><span class="badge badge-high">High</span></td></tr>
+        <tr><td><strong>Contact Form</strong></td><td>Visitor submits contact message → persisted to MongoDB</td><td><span class="badge badge-medium">Medium</span></td></tr>
+        <tr><td><strong>Student Chapters</strong></td><td>Pages for AiMSA, AAAI, IEEE-CS, IEEE-CIS, GfG, etc.</td><td><span class="badge badge-medium">Medium</span></td></tr>
+        <tr><td><strong>Global Themes</strong></td><td>Dark / Light toggle persisted via ThemeContext variables</td><td><span class="badge badge-medium">Medium</span></td></tr>
+      </tbody>
+    </table>
+    <div class="sub-heading">Non-Functional Requirements</div>
+    <ul class="body-list">
+      <li><strong>Performance:</strong> Fast page load speeds; Vite code-splitting applied; Vercel CDN routing.</li>
+      <li><strong>Security:</strong> JWT-signed tokens for sessions; bcryptjs hashing; dotenv-based secrets.</li>
+      <li><strong>Scalability:</strong> Mongoose NoSQL approach provides scaling; APIs modularized into separate routers.</li>
+      <li><strong>Responsiveness:</strong> TailwindCSS layout scales flawlessly from mobile up to 4K.</li>
+    </ul>
+
+    <div class="sec-heading">2.2 High-Level Design (HLD) &amp; Use Cases</div>
+    <div class="sub-heading">Use Case: Teacher Dashboard Auth Flow</div>
+    <div style="margin: 16px 0;">
+      <div class="flow-box">START: Teacher visits /teacher-login</div><div class="flow-arrow">↓</div>
+      <div class="flow-box">POST /api/auth/login → Validates Hash</div><div class="flow-arrow">↓</div>
+      <div class="flow-box">Generate JWT Token & Return</div><div class="flow-arrow">↓</div>
+      <div class="flow-box">AuthContext updates state</div><div class="flow-arrow">↓</div>
+      <div class="flow-box">ProtectedRoute Grants Render Access</div>
+    </div>
+
+    <div class="sec-heading">2.3 Acceptance Criteria</div>
+    <table class="data-table">
+      <thead><tr><th>Criterion Validation Action</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Teacher can log in, access dashboard safely, session persists.</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
+        <tr><td>PDF document upload bridges to AI API returning structured summary.</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
+        <tr><td>Contact form saves public messages into secure MongoDB collection.</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
+        <tr><td>Navigation across React routes successfully renders without 404s.</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
+        <tr><td>Dark and Light visual themes transition cleanly and persist.</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
+      </tbody>
+    </table>
+
+
+    <!-- PHASE 3: DESIGN -->
+    <div class="doc-header">
+      <span class="doc-title">PCCOE AI &amp; ML Department Website</span>
+      <span class="doc-phase">Phase 3 — Design</span>
+    </div>
+    <div class="phase-banner" style="border-color: #8b5cf6;">
+      <div class="phase-num" style="background: #8b5cf6;">3</div>
+      <div>
+        <h2>Design Phase</h2>
+        <p>System Architecture · DB Design · Software Components · API Docs</p>
       </div>
     </div>
-    <div class="er-rel">posts<br/>↕</div>
-    <div class="er-entity">
-      <div class="er-entity-title">Notice</div>
-      <div class="er-fields">
-        <div class="er-field"><span class="fname">_id</span><span class="ftype">ObjectId</span><span class="fkey">PK</span></div>
-        <div class="er-field"><span class="fname">title</span><span class="ftype">String (req)</span></div>
-        <div class="er-field"><span class="fname">date</span><span class="ftype">String (req)</span></div>
-        <div class="er-field"><span class="fname">link</span><span class="ftype">String (URL)</span></div>
-        <div class="er-field"><span class="fname">content</span><span class="ftype">String</span></div>
-        <div class="er-field"><span class="fname">createdAt</span><span class="ftype">Date (auto)</span></div>
-        <div class="er-field"><span class="fname">updatedAt</span><span class="ftype">Date (auto)</span></div>
+    <div class="sec-heading">3.1 System Architecture </div>
+    <p>The platform employs a decoupled modern 4-tier MERN stack framework:</p>
+    <ul class="body-list">
+      <li><strong>Frontend Layer:</strong> React SPA packaged via Vite. Deployed globally using Vercel.</li>
+      <li><strong>Backend Layer:</strong> Node.js & Express server hosted on Render, handling REST operations.</li>
+      <li><strong>AI Middleware:</strong> Streams binaries into RAM, parsing via pdf-parse, piping to Groq.</li>
+      <li><strong>Data Layer:</strong> MongoDB Atlas NoSQL cluster using Mongoose ODM schemas.</li>
+    </ul>
+
+    <div class="sec-heading">3.2 Database Design &amp; Collections</div>
+    <table class="data-table">
+      <thead><tr><th>Collection</th><th>Core Fields</th><th>Relationships & Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Faculty</strong></td><td><code>_id, name, designation, email, imageURL, scopus</code></td><td>Public faculty directory grid.</td></tr>
+        <tr><td><strong>Notice</strong></td><td><code>_id, title, date, linkURL, documentId</code></td><td>Main bulletin announcement board.</td></tr>
+        <tr><td><strong>Contact</strong></td><td><code>_id, name, email, subject, messageBody</code></td><td>Inbound query form data storage.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sec-heading">3.3 API Endpoint Interface</div>
+    <table class="data-table">
+      <thead><tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>GET</strong></td><td><code>/api/faculty</code></td><td>Public</td><td>Retrieve comprehensive mapped faculty array.</td></tr>
+        <tr><td><strong>GET</strong></td><td><code>/api/notices</code></td><td>Public</td><td>Returns active announcements sorted backwards in time.</td></tr>
+        <tr><td><strong>POST</strong></td><td><code>/api/notices</code></td><td>JWT secured</td><td>Generates new dynamic notice object.</td></tr>
+        <tr><td><strong>POST</strong></td><td><code>/api/contact</code></td><td>Public</td><td>Pipes inbound communication form variables into Mongo.</td></tr>
+        <tr><td><strong>POST</strong></td><td><code>/api/ai/summarize</code></td><td>Public</td><td>Upload interface utilizing Multipart Form Data for PDF extraction.</td></tr>
+      </tbody>
+    </table>
+
+
+    <!-- PHASE 4: IMPLEMENTATION -->
+    <div class="doc-header">
+      <span class="doc-title">PCCOE AI &amp; ML Department Website</span>
+      <span class="doc-phase">Phase 4 — Implementation</span>
+    </div>
+    <div class="phase-banner" style="border-color: #ec4899;">
+      <div class="phase-num" style="background: #ec4899;">4</div>
+      <div>
+        <h2>Implementation Phase</h2>
+        <p>Code Highlights · Technical Libraries · Code Review</p>
       </div>
     </div>
-    <div class="er-rel">receives<br/>↕</div>
-    <div class="er-entity">
-      <div class="er-entity-title">Contact</div>
-      <div class="er-fields">
-        <div class="er-field"><span class="fname">_id</span><span class="ftype">ObjectId</span><span class="fkey">PK</span></div>
-        <div class="er-field"><span class="fname">name</span><span class="ftype">String (req)</span></div>
-        <div class="er-field"><span class="fname">email</span><span class="ftype">String (req)</span></div>
-        <div class="er-field"><span class="fname">subject</span><span class="ftype">String</span></div>
-        <div class="er-field"><span class="fname">message</span><span class="ftype">String (req)</span></div>
-        <div class="er-field"><span class="fname">createdAt</span><span class="ftype">Date (auto)</span></div>
+    <div class="sec-heading">4.1 Implementation Highlights</div>
+    <ul class="body-list">
+      <li><strong>PDF Data Processing:</strong> Deployed a secure pipeline using <code>pdf-parse</code> combined with Multer's <code>memoryStorage</code>. Streams analysis entirely within RAM bypassing risky disk I/O.</li>
+      <li><strong>Smart Chunking Logic:</strong> Algorithm to divide large documents into boundary-safe payload segments to prevent LLM rejection from Groq.</li>
+      <li><strong>React Security State:</strong> Centralized JWT authorization tracking via seamless Context API wrappers.</li>
+    </ul>
+
+    <div class="sec-heading">4.2 Key Library Implementations</div>
+    <table class="data-table">
+      <thead><tr><th>NPM Library</th><th>Implementation Role</th></tr></thead>
+      <tbody>
+        <tr><td><strong>react-router-dom</strong></td><td>Enables 48-page layout ensuring smooth routing without hard refresh reloads.</td></tr>
+        <tr><td><strong>tailwindcss</strong></td><td>Strictly governs layout constraints standardizing mobile scaling logic.</td></tr>
+        <tr><td><strong>jsonwebtoken & bcryptjs</strong></td><td>Core auth layer securely hashing passwords and producing local sessions.</td></tr>
+        <tr><td><strong>multer & pdf-parse</strong></td><td>Memory-safe inbound middleware handlers preventing server disk bloat.</td></tr>
+        <tr><td><strong>groq-sdk</strong></td><td>Provides ultra-fast LPU inference communication for AI summarization.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sec-heading">4.3 Code Review (CR) Records</div>
+    <table class="data-table">
+      <thead><tr><th>Issue Discovered</th><th>Resolution Applied</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Navbar Overlaps:</strong> Menus overlapped footer on mobile causing unclickable links.</td><td>Applied strict <code>z-index</code> maps mapping above Tailwind's breakpoint layers.</td></tr>
+        <tr><td><strong>JSON Parsing Crashes:</strong> Unhandled JSON.parse crashed if Groq returned Markdown formatting blocks.</td><td>Authored REGEX sanitizer scrubbing decorators prior to node ingestion logic.</td></tr>
+        <tr><td><strong>Link Re-rendering:</strong> Native HTML anchor tags triggered full DOM clearance.</td><td>Replaced natively with React <code>&lt;Link&gt;</code> to maintain component preservation.</td></tr>
+      </tbody>
+    </table>
+
+
+    <!-- PHASE 5: TESTING -->
+    <div class="doc-header">
+      <span class="doc-title">PCCOE AI &amp; ML Department Website</span>
+      <span class="doc-phase">Phase 5 — Testing</span>
+    </div>
+    <div class="phase-banner" style="border-color: #f59e0b;">
+      <div class="phase-num" style="background: #f59e0b;">5</div>
+      <div>
+        <h2>Testing Phase</h2>
+        <p>Test Strategies · Bug Reports · Test Executions</p>
       </div>
     </div>
-  </div>
+    <div class="sec-heading">5.1 Master Test Plan</div>
+    <p>Comprehensive Manual Black-Box Analysis. Evaluated via Chrome Developer Tools for UI boundaries and Postman for backend endpoint rigor. Validated locally and confirmed cross-origin from Vercel to Render without issues.</p>
 
-  <div class="sec-heading">3.3 API Endpoint Design (LLD)</div>
-  <table>
-    <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th></tr></thead>
-    <tbody>
-      <tr><td><span class="badge" style="background:#d1fae5;color:#065f46;">GET</span></td><td><code>/api/faculty</code></td><td>Retrieve all faculty members from MongoDB</td><td>No</td></tr>
-      <tr><td><span class="badge" style="background:#dbeafe;color:#1e40af;">POST</span></td><td><code>/api/faculty</code></td><td>Create a new faculty record (admin/seeding)</td><td>No</td></tr>
-      <tr><td><span class="badge" style="background:#d1fae5;color:#065f46;">GET</span></td><td><code>/api/notices</code></td><td>Fetch all notices sorted by timestamp</td><td>No</td></tr>
-      <tr><td><span class="badge" style="background:#dbeafe;color:#1e40af;">POST</span></td><td><code>/api/notices</code></td><td>Create a new notice entry</td><td>JWT</td></tr>
-      <tr><td><span class="badge" style="background:#fef3c7;color:#92400e;">PUT</span></td><td><code>/api/notices/:id</code></td><td>Update a notice by ID</td><td>JWT</td></tr>
-      <tr><td><span class="badge" style="background:#fee2e2;color:#991b1b;">DEL</span></td><td><code>/api/notices/:id</code></td><td>Delete a notice record</td><td>JWT</td></tr>
-      <tr><td><span class="badge" style="background:#dbeafe;color:#1e40af;">POST</span></td><td><code>/api/contact</code></td><td>Submit a contact message → saved to DB</td><td>No</td></tr>
-      <tr><td><span class="badge" style="background:#d1fae5;color:#065f46;">GET</span></td><td><code>/api/students</code></td><td>Retrieve student records by department</td><td>No</td></tr>
-      <tr><td><span class="badge" style="background:#dbeafe;color:#1e40af;">POST</span></td><td><code>/api/ai/summarize</code></td><td>Upload PDF → Groq LLaMA processes → returns JSON study guide</td><td>No</td></tr>
-      <tr><td><span class="badge" style="background:#dbeafe;color:#1e40af;">POST</span></td><td><code>/api/ai/ask</code></td><td>Submit question + optional PDF → Gemini returns answer</td><td>No</td></tr>
-      <tr><td><span class="badge" style="background:#d1fae5;color:#065f46;">GET</span></td><td><code>/api/ai/pyq-analysis/:subjectId</code></td><td>Return PYQ topic frequency for ml / dl subjects</td><td>No</td></tr>
-      <tr><td><span class="badge" style="background:#d1fae5;color:#065f46;">GET</span></td><td><code>/</code></td><td>Health-check endpoint → 200 OK prevents Render cold start</td><td>No</td></tr>
-    </tbody>
-  </table>
+    <div class="sec-heading">5.2 Feature Test Case Matrix</div>
+    <table class="data-table">
+      <thead><tr><th>Test Scenario</th><th>Expected System Outcome</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Submit correct admin credentials via login module.</td><td>Forces redirect to secure Dashboard UI safely.</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
+        <tr><td>Navigate URL manually to secure dashboard without a token.</td><td>ProtectedRoute punts user back to login view.</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
+        <tr><td>Pass valid PDF into Groq Summarizer.</td><td>Delivers 200 OK JSON structural guide payload.</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
+        <tr><td>Submit AI API request forcibly passing an empty wrapper.</td><td>Middleware returns HTTP 400 "No PDF uploaded".</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
+        <tr><td>Perform POST for new Notice via Dashboard.</td><td>UI state instantly updates reflecting 201 Created.</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
+        <tr><td>Toggle Dark/Light system state globally.</td><td>DOM variables repaint correctly, stored efficiently.</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
+      </tbody>
+    </table>
 
-  <div class="doc-footer">
-    <span>PCCOE AI &amp; ML Department Website — Project Report</span>
-    <span>Page 7 / 15</span>
-  </div>
-</div>
+    <div class="sec-heading">5.3 Bug Discovery &amp; Resolution Reporting</div>
+    <table class="data-table">
+      <thead><tr><th>Defect Discovered In Testing</th><th>Permanent Solution Engineered</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Mobile Font Overflow:</strong> Standard text sizes caused structural wrapping.</td><td>Normalized base HTML to flexible <code>clamp()</code> functions preventing mobile clipping.</td></tr>
+        <tr><td><strong>Context Hydration Issue:</strong> Teacher dashboard rendered blank upon F5.</td><td>Engineered <code>useEffect()</code> listeners re-hydrating tokens on manual memory loads.</td></tr>
+        <tr><td><strong>CORS Rejection Block:</strong> Initial staging blocked requests out to Render host.</td><td>Shifted Express CORS middleware initialization line universally upstream.</td></tr>
+      </tbody>
+    </table>
 
-<!-- ══════════════════════════════════════════
-     PHASE 4 — IMPLEMENTATION
-══════════════════════════════════════════ -->
-<div class="page section-page">
-  <div class="doc-header">
-    <span class="doc-title">PCCOE AI &amp; ML Department Website</span>
-    <span class="doc-phase">Phase 4 — Implementation</span>
-  </div>
 
-  <div class="phase-banner">
-    <div class="phase-num-circle" style="background:linear-gradient(135deg,#f59e0b,#d97706);">4</div>
-    <div class="phase-banner-text">
-      <h2>Implementation Phase</h2>
-      <p>Code Comments &nbsp;·&nbsp; API Documentation &nbsp;·&nbsp; Code Review Records &nbsp;·&nbsp; Key Highlights</p>
+    <!-- PHASE 6: DEPLOYMENT -->
+    <div class="doc-header">
+      <span class="doc-title">PCCOE AI &amp; ML Department Website</span>
+      <span class="doc-phase">Phase 6 — Deployment</span>
     </div>
-  </div>
-
-  <div class="sec-heading">4.1 AI PDF Summarizer Flow</div>
-  <div class="flow">
-    <div class="flow-box start-end">START: Student clicks "Summarize PDF" in Study Resources</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">Upload PDF via multipart/form-data → POST /api/ai/summarize</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">Multer stores file in memory buffer (memoryStorage)</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">pdf-parse extracts full text from buffer</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">Text chunked into 45 000-char segments (chunkText utility)</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">Each chunk → Groq LLaMA 3.3-70B: deep technical extraction</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">All chunk summaries combined → final Groq prompt (JSON mode)</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">JSON study guide (7 sections) returned to frontend</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">SmartSummaryModal renders formatted study guide for student</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box start-end">END: Student reads exam-ready notes on screen</div>
-    <div class="flow-caption">Figure 2: AI PDF Summarizer &amp; Study Guide Generation Flow</div>
-  </div>
-
-  <div class="sec-heading">4.2 Key Implementation Highlights</div>
-  <table>
-    <thead><tr><th>Component</th><th>Technology / Library</th><th>Purpose</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Scroll Progress Bar</strong></td><td>Framer Motion (useScroll + useSpring)</td><td>Animated cyan progress bar at top viewport on every page</td></tr>
-      <tr><td><strong>Custom Cursor</strong></td><td>CustomCursor.jsx · mouse events</td><td>Premium interactive cursor with trail effect across all pages</td></tr>
-      <tr><td><strong>Theme System</strong></td><td>ThemeContext (React Context API)</td><td>Global dark/light toggle persisted; CSS variables re-scoped on body</td></tr>
-      <tr><td><strong>Teacher Auth</strong></td><td>jsonwebtoken (JWT) · AuthContext</td><td>ProtectedRoute wraps /teacher-dashboard; redirects unauthenticated users</td></tr>
-      <tr><td><strong>PDF Processing</strong></td><td>pdf-parse + Multer memoryStorage</td><td>Streams uploaded file → parsed text without touching disk; safe for cloud</td></tr>
-      <tr><td><strong>AI Chunking</strong></td><td>Custom chunkText() utility</td><td>Splits PDFs into 45 000-char chunks to stay within LLM context window</td></tr>
-      <tr><td><strong>Groq Integration</strong></td><td>groq-sdk (LLaMA 3.3-70B)</td><td>PDF summarization in JSON mode; PYQ analysis; max_tokens: 4096/chunk</td></tr>
-      <tr><td><strong>Gemini Integration</strong></td><td>@google/genai (Gemini 1.5 Flash)</td><td>AI Tutor Q&amp;A with optional PDF context injected into prompt</td></tr>
-      <tr><td><strong>Navbar Mega-Menu</strong></td><td>React state + Framer Motion</td><td>Multi-level dropdown navigation covering all 48 routes; mobile hamburger</td></tr>
-      <tr><td><strong>Neural Background</strong></td><td>NeuralBackground.jsx (Canvas API)</td><td>Animated node-edge neural network canvas rendered behind Hero section</td></tr>
-      <tr><td><strong>Data Separation</strong></td><td>/src/data/*.js files</td><td>All static content (iprData, coTeachingData, consultancyData) in separate JS modules</td></tr>
-      <tr><td><strong>Route Modularization</strong></td><td>5 Express route files</td><td>facultyRoutes, noticeRoutes, contactRoutes, studentRoutes, aiRoutes — single responsibility</td></tr>
-      <tr><td><strong>Error Handling</strong></td><td>try-catch in all async routes</td><td>Structured JSON error responses; AI fallback mock data when API keys absent</td></tr>
-    </tbody>
-  </table>
-
-  <div class="sec-heading">4.3 Code Review Records</div>
-  <table>
-    <thead><tr><th>Review ID</th><th>Component / File</th><th>Issue Found</th><th>Resolution Applied</th></tr></thead>
-    <tbody>
-      <tr><td><strong>CR-01</strong></td><td>Navbar.jsx</td><td>Dropdown menus overlapping footer on mobile viewports</td><td>Added z-index layering and overflow-hidden on mobile menu container</td></tr>
-      <tr><td><strong>CR-02</strong></td><td>aiRoutes.js</td><td>JSON.parse error crashing server when LLM returned non-JSON text</td><td>Added markdown code-fence stripping before parse; fallback error response</td></tr>
-      <tr><td><strong>CR-03</strong></td><td>Footer.jsx</td><td>Footer nav links used plain &lt;a href="#"&gt; instead of React Router Link</td><td>Replaced all anchor tags with &lt;Link to="..."&gt; from react-router-dom</td></tr>
-      <tr><td><strong>CR-04</strong></td><td>TeacherDashboard.jsx</td><td>No loading/error state shown during API calls causing blank UI flicker</td><td>Added isLoading state + spinner; error boundary with retry button</td></tr>
-      <tr><td><strong>CR-05</strong></td><td>index.css / global CSS</td><td>Font size scale too large causing layout overflow on narrow viewports</td><td>Recalibrated base font to 0.95rem; applied clamp() for responsive headings</td></tr>
-    </tbody>
-  </table>
-
-  <div class="doc-footer">
-    <span>PCCOE AI &amp; ML Department Website — Project Report</span>
-    <span>Page 9 / 15</span>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     PHASE 5 — TESTING
-══════════════════════════════════════════ -->
-<div class="page section-page">
-  <div class="doc-header">
-    <span class="doc-title">PCCOE AI &amp; ML Department Website</span>
-    <span class="doc-phase">Phase 5 — Testing</span>
-  </div>
-
-  <div class="phase-banner">
-    <div class="phase-num-circle" style="background:linear-gradient(135deg,#ef4444,#dc2626);">5</div>
-    <div class="phase-banner-text">
-      <h2>Testing Phase</h2>
-      <p>Test Plan &nbsp;·&nbsp; Test Case Matrix &nbsp;·&nbsp; Bug Reports &amp; Test Results</p>
+    <div class="phase-banner" style="border-color: #ef4444;">
+      <div class="phase-num" style="background: #ef4444;">6</div>
+      <div>
+        <h2>Deployment Phase</h2>
+        <p>Release Notes · Deploy Configuration · Installation Checklist</p>
+      </div>
     </div>
-  </div>
+    <div class="sec-heading">6.1 Deployment Architecture</div>
+    <p>
+      The Frontend activates a Vercel CI environment running <code>npm run build</code>, pushed dynamically out to edge-networks. The Backend activates on Render, pulling NPM packages and spinning the Express listener binding to MongoDB Atlas instances.
+    </p>
 
-  <div class="sec-heading">5.1 Test Plan</div>
-  <div class="info-grid">
-    <div class="info-card"><div class="ic-label">Testing Strategy</div><div class="ic-value">Manual Black-Box Testing</div><div class="ic-sub">API testing via Postman + Browser UI validation</div></div>
-    <div class="info-card"><div class="ic-label">Scope</div><div class="ic-value">All 12 API Endpoints + 48 UI Routes</div><div class="ic-sub">Auth flow · AI features · CRUD operations · Theme</div></div>
-    <div class="info-card"><div class="ic-label">Test Environment</div><div class="ic-value">Local Dev + Production Render</div><div class="ic-sub">localhost:5173 (frontend) · localhost:5000 (backend)</div></div>
-    <div class="info-card"><div class="ic-label">Tools Used</div><div class="ic-value">Postman · Chrome DevTools</div><div class="ic-sub">Network tab · Console · React DevTools</div></div>
-  </div>
+    <div class="sec-heading">6.2 Master Verification Checklist</div>
+    <ul class="body-list" style="list-style-type: none; margin-left: 0;">
+      <li><span style="color:#0ea5e9; font-weight:bold;">[x]</span> <strong>Vercel Domain Live:</strong> Main UI interface actively responding securely on public route endpoints.</li>
+      <li><span style="color:#0ea5e9; font-weight:bold;">[x]</span> <strong>Render API Warm:</strong> Backend responsive allowing immediate data traversal over HTTPS.</li>
+      <li><span style="color:#0ea5e9; font-weight:bold;">[x]</span> <strong>CORS Policies Solidified:</strong> Allowances securely restricted linking Vercel explicitly to Render cleanly.</li>
+      <li><span style="color:#0ea5e9; font-weight:bold;">[x]</span> <strong>MongoDB Permissions Validated:</strong> Mongo networks accept whitelisted 0.0.0.0 addresses ensuring server access globally.</li>
+      <li><span style="color:#0ea5e9; font-weight:bold;">[x]</span> <strong>GROQ_API_KEY Configured:</strong> Dashboard environmental variable securely mapped operating AI processes rapidly.</li>
+      <li><span style="color:#0ea5e9; font-weight:bold;">[x]</span> <strong>SPA Fallback Defined:</strong> Navigation rewrites natively map sub-directories smoothly preventing manual 404 URL errors safely.</li>
+    </ul>
 
-  <div class="sec-heading">5.2 Test Case Matrix</div>
-  <table>
-    <thead><tr><th>TC ID</th><th>Module</th><th>Test Scenario</th><th>Input</th><th>Expected Outcome</th><th>Result</th></tr></thead>
-    <tbody>
-      <tr><td><strong>TC-01</strong></td><td>Auth</td><td>Teacher login with valid credentials</td><td>Correct user/pass</td><td>JWT token returned; redirected to /teacher-dashboard</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>TC-02</strong></td><td>Auth</td><td>Access /teacher-dashboard without login</td><td>No JWT token</td><td>ProtectedRoute redirects to /teacher-login</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>TC-03</strong></td><td>AI</td><td>PDF summarize with valid lecture PDF</td><td>PDF upload</td><td>JSON response with 7 study guide sections</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>TC-04</strong></td><td>AI</td><td>PDF summarize with no file attached</td><td>No file</td><td>400 status: "No PDF file uploaded."</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>TC-05</strong></td><td>AI</td><td>AI Tutor question with PDF context</td><td>Question + PDF</td><td>Gemini returns contextual markdown answer</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>TC-06</strong></td><td>AI</td><td>AI Tutor question without file</td><td>Question only</td><td>Gemini returns general knowledge answer</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>TC-07</strong></td><td>AI</td><td>PYQ analysis for ML subject</td><td>GET /api/ai/pyq-analysis/ml</td><td>JSON with 5 ranked ML topics</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>TC-08</strong></td><td>Faculty</td><td>GET all faculty from MongoDB</td><td>GET /api/faculty</td><td>Array of faculty JSON objects returned</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>TC-09</strong></td><td>Faculty</td><td>POST new faculty without required fields</td><td>Missing name</td><td>400 Validation error from Mongoose</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>TC-10</strong></td><td>Notice</td><td>Create notice via Teacher Dashboard</td><td>Valid JWT + data</td><td>Notice persisted; 201 Created response</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>TC-11</strong></td><td>Contact</td><td>Submit contact form with all fields</td><td>Name, email, message</td><td>Contact document saved in MongoDB</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>TC-12</strong></td><td>Routing</td><td>Navigate to all 48 React routes</td><td>Direct URL navigation</td><td>All pages render without blank screen or errors</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>TC-13</strong></td><td>Theme</td><td>Dark/Light toggle across pages</td><td>Theme toggle click</td><td>All components switch theme; state persists on reload</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>TC-14</strong></td><td>Responsive</td><td>Mobile layout at 375px viewport</td><td>iPhone SE width</td><td>Navbar collapses to hamburger; no overflow</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-      <tr><td><strong>TC-15</strong></td><td>Deploy</td><td>Health-check endpoint on Render</td><td>GET /</td><td>200 OK: "PCCOE AI &amp; ML Website API Running"</td><td><span class="badge badge-pass">✔ Pass</span></td></tr>
-    </tbody>
-  </table>
-
-  <div class="sec-heading">5.3 Bug Reports / Resolution Log</div>
-  <table>
-    <thead><tr><th>Bug ID</th><th>Issue</th><th>Root Cause</th><th>Fix Applied</th><th>Severity</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><strong>BUG-01</strong></td>
-        <td>Footer navigation links not working; stayed on same page</td>
-        <td>Plain &lt;a href="#"&gt; used instead of React Router &lt;Link&gt; component</td>
-        <td>Replaced all href="#" anchors with &lt;Link to="/route"&gt; from react-router-dom in Footer.jsx</td>
-        <td><span class="badge badge-high">High</span></td>
-      </tr>
-      <tr>
-        <td><strong>BUG-02</strong></td>
-        <td>AI summarizer crashing when LLM returned markdown-wrapped JSON</td>
-        <td>JSON.parse failed on ```json ... ``` code fences in LLM response string</td>
-        <td>Added code-fence stripping logic before JSON.parse; wrapped in try-catch with 500 fallback</td>
-        <td><span class="badge badge-high">High</span></td>
-      </tr>
-      <tr>
-        <td><strong>BUG-03</strong></td>
-        <td>Global CSS font size causing text overflow on mobile viewports</td>
-        <td>Base font set too large (1.1rem); cascaded into heading sizes that overflowed containers</td>
-        <td>Normalized base to 0.95rem; applied clamp() on headings; retested at 375/768/1440px</td>
-        <td><span class="badge badge-medium">Medium</span></td>
-      </tr>
-      <tr>
-        <td><strong>BUG-04</strong></td>
-        <td>Teacher Dashboard showing blank after page reload despite valid session</td>
-        <td>AuthContext not re-reading localStorage token on component mount</td>
-        <td>Added useEffect in AuthProvider to hydrate auth state from localStorage on initial load</td>
-        <td><span class="badge badge-high">High</span></td>
-      </tr>
-      <tr>
-        <td><strong>BUG-05</strong></td>
-        <td>CORS blocked API requests from Render frontend to Render backend</td>
-        <td>cors() middleware not applied to all routes in index.js before route mounting</td>
-        <td>Moved app.use(cors()) before all route registrations in the middleware chain</td>
-        <td><span class="badge badge-high">High</span></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="doc-footer">
-    <span>PCCOE AI &amp; ML Department Website — Project Report</span>
-    <span>Page 11 / 15</span>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     PHASE 6 — DEPLOYMENT
-══════════════════════════════════════════ -->
-<div class="page section-page">
-  <div class="doc-header">
-    <span class="doc-title">PCCOE AI &amp; ML Department Website</span>
-    <span class="doc-phase">Phase 6 — Deployment</span>
-  </div>
-
-  <div class="phase-banner">
-    <div class="phase-num-circle" style="background:linear-gradient(135deg,#ec4899,#be185d);">6</div>
-    <div class="phase-banner-text">
-      <h2>Deployment Phase</h2>
-      <p>Release Notes &nbsp;·&nbsp; User Manual &nbsp;·&nbsp; Installation Guide &nbsp;·&nbsp; Deployment Checklist</p>
+    <div style="text-align: center; margin-top: 40px; border-top: 2px solid #e2e8f0; padding-top: 20px;">
+      <strong style="color: #0f172a; font-size: 13pt;">END OF DOCUMENT</strong>
     </div>
-  </div>
 
-  <div class="sec-heading">6.1 Deployment Architecture Flow</div>
-  <div class="flow">
-    <div class="flow-box start-end">START: Code committed &amp; pushed to GitHub repository</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">Render detects push → auto-build triggered (CI)</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">Frontend: npm install → vite build → /dist served as static site</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">Backend: npm install → node index.js starts on port 5000</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">Environment variables injected from Render dashboard</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">Mongoose connects to MongoDB Atlas (MONGO_URI)</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box">Health check GET / → 200 OK confirms service warm</div>
-    <div class="flow-arrow"></div>
-    <div class="flow-box start-end">END: Application live at production URL</div>
-    <div class="flow-caption">Figure 3: CI/CD Deployment Flow on Render Platform</div>
-  </div>
-
-  <div class="sec-heading">6.2 Release Notes (v1.0 — Production)</div>
-  <table>
-    <thead><tr><th>Feature</th><th>Status</th><th>Notes</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Full-Stack Deployment on Render</strong></td><td><span class="badge badge-done">✔ Live</span></td><td>Frontend SPA + Backend API both deployed; CORS configured</td></tr>
-      <tr><td><strong>MongoDB Atlas Integration</strong></td><td><span class="badge badge-done">✔ Live</span></td><td>All 4 collections active; Atlas whitelist set to 0.0.0.0/0</td></tr>
-      <tr><td><strong>Groq AI Summarizer (LLaMA 3.3-70B)</strong></td><td><span class="badge badge-done">✔ Live</span></td><td>PDF chunking + JSON study guide generation active</td></tr>
-      <tr><td><strong>Gemini AI Tutor (1.5 Flash)</strong></td><td><span class="badge badge-done">✔ Live</span></td><td>Q&amp;A with/without PDF context; markdown rendering</td></tr>
-      <tr><td><strong>Teacher Portal (JWT Auth)</strong></td><td><span class="badge badge-done">✔ Live</span></td><td>ProtectedRoute + AuthContext + localStorage session</td></tr>
-      <tr><td><strong>48 Public React Routes</strong></td><td><span class="badge badge-done">✔ Live</span></td><td>All pages accessible; React Router v6 with SPA fallback</td></tr>
-      <tr><td><strong>Dark / Light Theme</strong></td><td><span class="badge badge-done">✔ Live</span></td><td>ThemeContext persists preference across navigation</td></tr>
-    </tbody>
-  </table>
-
-  <div class="sec-heading">6.3 Environment Configuration</div>
-  <table class="env-table">
-    <thead><tr><th>Variable</th><th>Purpose</th><th>Required</th></tr></thead>
-    <tbody>
-      <tr><td class="code">MONGO_URI</td><td>MongoDB Atlas connection string (includes credentials &amp; cluster)</td><td><span class="badge badge-yes">Yes</span></td></tr>
-      <tr><td class="code">GROQ_API_KEY</td><td>Groq API key for LLaMA 3.3-70B (PDF summarizer + PYQ analyzer)</td><td><span class="badge badge-yes">Yes</span></td></tr>
-      <tr><td class="code">GEMINI_API_KEY</td><td>Google Gemini API key for AI Tutor (Gemini 1.5 Flash model)</td><td><span class="badge badge-yes">Yes</span></td></tr>
-      <tr><td class="code">PORT</td><td>Server port binding (defaults to 5000 locally; auto on Render)</td><td>Auto</td></tr>
-    </tbody>
-  </table>
-
-  <div class="sec-heading">6.4 Installation Guide (Local Development)</div>
-  <div class="sub-heading">Backend Setup</div>
-  <ul class="normal-list">
-    <li><code>cd backend</code> → <code>npm install</code> — installs all Node.js dependencies</li>
-    <li>Create <code>.env</code> file with MONGO_URI, GROQ_API_KEY, GEMINI_API_KEY</li>
-    <li><code>npm run dev</code> — starts Express server on port 5000 with nodemon hot-reload</li>
-    <li>Optional: <code>node seed.js</code> — seeds MongoDB with sample faculty and notice data</li>
-  </ul>
-  <div class="sub-heading">Frontend Setup</div>
-  <ul class="normal-list">
-    <li><code>cd frontend</code> → <code>npm install</code> — installs React, Vite, TailwindCSS, Framer Motion</li>
-    <li>Configure <code>vite.config.js</code> proxy to point <code>/api</code> to <code>http://localhost:5000</code></li>
-    <li><code>npm run dev</code> — starts Vite dev server on port 5173 with HMR</li>
-    <li><code>npm run build</code> — generates production bundle in <code>/dist</code> folder</li>
-  </ul>
-
-  <div class="sec-heading">6.5 User Manual</div>
-  <table>
-    <thead><tr><th>#</th><th>Feature</th><th>How to Use</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td><strong>Browse Department Info</strong></td><td>Navigate via the top Navbar mega-menu to any section: About, Faculty, Research, Student Chapters, etc.</td></tr>
-      <tr><td>2</td><td><strong>AI PDF Summarizer</strong></td><td>Go to Study Resources → upload any lecture PDF → click "Generate Summary" → read 7-section study guide</td></tr>
-      <tr><td>3</td><td><strong>AI Tutor Q&amp;A</strong></td><td>Go to Study Resources → optionally upload a PDF → type question → receive Gemini-powered answer</td></tr>
-      <tr><td>4</td><td><strong>PYQ Analyzer</strong></td><td>Select subject (ML or DL) → view frequency-ranked previous year question topics automatically</td></tr>
-      <tr><td>5</td><td><strong>Contact Department</strong></td><td>Go to Contact page → fill name, email, subject, message → click Submit → confirmation shown</td></tr>
-      <tr><td>6</td><td><strong>Teacher Login</strong></td><td>Navigate to /teacher-login → enter credentials → access dashboard to manage faculty, notices, students</td></tr>
-      <tr><td>7</td><td><strong>Dark/Light Theme</strong></td><td>Click the sun/moon toggle in the Navbar — theme switches and persists across all pages and sessions</td></tr>
-    </tbody>
-  </table>
-
-  <div class="sec-heading">6.6 Deployment Checklist</div>
-  <ul class="checklist">
-    <li><span class="check-num">1</span><span class="check-icon">✅</span><div class="check-text"><strong>npm install</strong> — all backend &amp; frontend dependencies resolved without errors</div></li>
-    <li><span class="check-num">2</span><span class="check-icon">✅</span><div class="check-text"><strong>MONGO_URI</strong> environment variable set in Render dashboard; Atlas IP whitelist configured</div></li>
-    <li><span class="check-num">3</span><span class="check-icon">✅</span><div class="check-text"><strong>GROQ_API_KEY</strong> set for PDF summarizer and PYQ analysis features</div></li>
-    <li><span class="check-num">4</span><span class="check-icon">✅</span><div class="check-text"><strong>GEMINI_API_KEY</strong> set for AI Tutor Q&amp;A (Gemini 1.5 Flash)</div></li>
-    <li><span class="check-num">5</span><span class="check-icon">✅</span><div class="check-text"><strong>CORS middleware</strong> applied globally before route mounting in index.js</div></li>
-    <li><span class="check-num">6</span><span class="check-icon">✅</span><div class="check-text"><strong>Express server</strong> bound to process.env.PORT with fallback to 5000</div></li>
-    <li><span class="check-num">7</span><span class="check-icon">✅</span><div class="check-text"><strong>Vite build</strong> (<code>npm run build</code>) generates /dist with all 48 React routes bundled</div></li>
-    <li><span class="check-num">8</span><span class="check-icon">✅</span><div class="check-text"><strong>Health-check endpoint</strong> GET / responds 200 OK preventing Render cold starts</div></li>
-    <li><span class="check-num">9</span><span class="check-icon">✅</span><div class="check-text"><strong>MongoDB Atlas</strong> snapshot backup cycle configured; cluster accessible from Render IPs</div></li>
-    <li><span class="check-num">10</span><span class="check-icon">✅</span><div class="check-text"><strong>GitHub repository</strong> connected to Render for auto-deploy on every push to main branch</div></li>
-    <li><span class="check-num">11</span><span class="check-icon">✅</span><div class="check-text"><strong>React Router SPA fallback</strong> configured on Render static site to serve index.html for all routes</div></li>
-    <li><span class="check-num">12</span><span class="check-icon">✅</span><div class="check-text"><strong>Production domain live</strong> — full application warm and accessible at production URL</div></li>
-  </ul>
-
-  <div class="doc-footer">
-    <span>PCCOE AI &amp; ML Department Website — Project Report</span>
-    <span>Page 13 / 15</span>
-  </div>
-</div>
+  </div> <!-- End Report Body -->
+</div> <!-- End Main Page -->
 
 </body>
 </html>

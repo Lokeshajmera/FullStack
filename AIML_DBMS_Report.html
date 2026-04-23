@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DBMS Mini Project Report - AIML Website</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 10pt; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+
+    /* ── PAGE LAYOUT ── */
+    .page {
+      width: 210mm;
+      margin: 0 auto;
+      padding: 14mm 16mm;
+      position: relative;
+    }
+
+    /* ── COVER PAGE ── */
+    .cover {
+      background: #ffffff;
+      color: #000000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 297mm;
+      padding: 20mm 18mm;
+      position: relative;
+      overflow: hidden;
+      border: 4px solid #000000;
+    }
+    .cover-top { position: relative; z-index: 2; width: 100%; }
+    .inst-name {
+      font-size: 14pt; font-weight: 800; color: #000000; text-transform: uppercase;
+      letter-spacing: 0.5px; margin-bottom: 2px;
+    }
+    .trust-name { font-size: 10pt; font-weight: 600; color: #000000; margin-bottom: 24px; text-transform: uppercase; }
+    
+    .proj-type {
+      font-size: 12pt; font-weight: 600; color: #000000; margin-bottom: 12px;
+    }
+    .cover-title {
+      font-size: 30pt; font-weight: 900; letter-spacing: -1px; line-height: 1.2;
+      color: #000000; margin-bottom: 40px; text-transform: uppercase;
+    }
+    
+    .submitted-by { margin-top: 20px; font-size: 11pt; margin-bottom: 30px;}
+    .submitted-by strong { color: #000000; font-size: 12pt; display: block; margin-bottom: 8px;}
+    .student-table { width: 60%; margin: 0 auto; border-collapse: collapse; margin-bottom: 20px;}
+    .student-table th, .student-table td { padding: 6px; text-align: left; border-bottom: 1px solid #000000; color: #000000;}
+    .student-table th { color: #000000; border-bottom: 2px solid #000000;}
+    
+    .guide-section { font-size: 11pt; margin-bottom: 40px; color: #000000;}
+    .guide-section strong { color: #000000; font-size: 12pt; display: block; margin-bottom: 4px;}
+    
+    .dept-info { font-size: 11pt; font-weight: 700; color: #000000; margin-bottom: 20px; }
+    .college-address { font-size: 9pt; color: #000000; max-width: 80%; margin: 0 auto 16px; line-height: 1.5; }
+    
+    .accreditation { font-size: 8pt; font-weight: 600; color: #000000; border-top: 1px solid #000000; border-bottom: 1px solid #000000; padding: 8px 0; max-width: 90%; margin: 0 auto 20px; line-height: 1.6;}
+    .year { font-size: 14pt; font-weight: 800; color: #000000; margin-top: auto;}
+
+    /* ── SECTION PAGES ── */
+    .section-page { padding-top: 16mm; }
+
+    /* Section heading */
+    .sec-heading {
+      font-size: 14pt; font-weight: 800; color: #0c4a6e;
+      border-bottom: 2px solid #7dd3fc;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+      margin-top: 24px;
+    }
+    .sec-heading:first-of-type { margin-top: 0; }
+
+    /* Sub-heading */
+    .sub-heading {
+      font-size: 11pt; font-weight: 700; color: #0284c7;
+      margin: 16px 0 8px 0;
+    }
+
+    /* ── TABLES ── */
+    table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 9pt; }
+    table thead tr { background: #f0f9ff; color: #0369a1; border-bottom: 2px solid #7dd3fc;}
+    table thead th { padding: 10px 12px; font-weight: 700; text-align: left; }
+    table tbody tr { border-bottom: 1px solid #e0f2fe; }
+    table tbody tr:nth-child(even) { background: #f8fafc; }
+    table tbody td { padding: 10px 12px; color: #374151; vertical-align: top; }
+    table tbody td strong { color: #111827; }
+    
+    .bordered-table, .bordered-table th, .bordered-table td { border: 1px solid #bae6fd; }
+
+    /* ── CODE BLOCKS FOR DDL/DML ── */
+    .code-block {
+      background: #1e293b; color: #f8fafc;
+      padding: 12px 16px; border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5pt; margin-bottom: 16px;
+      overflow-x: auto;
+      border-left: 4px solid #0ea5e9;
+      white-space: pre-wrap;
+      break-inside: avoid;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .code-comment { color: #94a3b8; font-style: italic; }
+    .code-keyword { color: #38bdf8; font-weight: bold; }
+    .code-string { color: #a7f3d0; }
+
+    p { font-size: 10pt; color: #374151; margin-bottom: 12px; line-height: 1.6; text-align: justify; }
+    ul.normal-list { padding-left: 20px; margin-bottom: 16px; }
+    ul.normal-list li { font-size: 10pt; color: #374151; margin-bottom: 6px; }
+
+    /* ── PAGE HEADER/FOOTER ── */
+    .doc-header {
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid #bae6fd;
+      padding-bottom: 8px; margin-bottom: 20px;
+    }
+    .doc-header .doc-title { font-size: 8pt; font-weight: 700; color: #0369a1; letter-spacing: 0.05em; text-transform: uppercase; }
+    
+    .doc-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid #bae6fd;
+      margin-top: 40px;
+      padding-top: 6px;
+      font-size: 8pt; color: #0369a1;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: #fff; }
+      .page { margin: 0; width: 210mm; border: none; }
+      .cover { break-after: page; border: 4px solid #000000;}
+      .index-page { break-after: page; }
+      .doc-header, .doc-footer { display: none; }
+    }
+    @page { size: A4; margin: 0; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     COVER PAGE
+══════════════════════════════════════════ -->
+<div class="page cover">
+  <div class="cover-top">
+    <div class="trust-name">Pimpri Chinchwad Education Trust’s</div>
+    <div class="inst-name">Pimpri Chinchwad College of Engineering</div>
+    
+    <div style="margin: 24px 0 10px 0;">
+      <img src="frontend/src/assets/logos/pccoelogo.webp" alt="PCCOE Logo" style="height: 140px; width: auto;" />
+    </div>
+    
+    <div style="margin: 40px 0;">
+      <div class="proj-type">A Mini Project Report (DBMS) on</div>
+      <div class="cover-title">“PCCOE AI &amp; ML<br>Department Website”</div>
+    </div>
+    
+    <div class="submitted-by">
+      <strong>Project submitted by:</strong>
+      <table class="student-table">
+        <tr><th>Name</th><th>Roll No</th></tr>
+        <tr><td>Lokesh Ajmera</td><td>124B1C004</td></tr>
+        <tr><td>Isha Thakur</td><td>124B1C006</td></tr>
+        <tr><td>Pratham Bokefode</td><td>124B1C016</td></tr>
+        <tr><td>Shamal Dighole</td><td>124B1C020</td></tr>
+      </table>
+    </div>
+    
+    <div class="dept-info">
+      Department of Computer Science & Engineering (AI & ML)
+    </div>
+    
+    <div class="college-address">
+      PCET’s Pimpri Chinchwad College of Engineering<br>
+      Sector-26, Pradhikaran, Nigdi Near Akurdi Railway Station,<br>Pune, Maharashtra, 411044, India
+    </div>
+    
+    <div class="accreditation">
+      NBA Accredited | NAAC Accredited With ‘A’ Grade | An Autonomous Institution<br>AICTE Approved | ISO 21001:2018 Certified | Permanently Affiliated to SPPU Pune
+    </div>
+  </div>
+  
+  <div class="year">2025-2026</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     INDEX PAGE
+══════════════════════════════════════════ -->
+<div class="page index-page">
+  <div class="doc-header">
+    <span class="doc-title">PCCOE AIML Website - DBMS Mini Project</span>
+  </div>
+
+  <div class="sec-heading" style="text-align:center; font-size: 20pt; border: none; margin-bottom: 5px; margin-top: 0;">Index</div>
+
+  <table class="bordered-table" style="width: 80%; margin: 5px auto; font-size: 10pt;">
+    <thead>
+      <tr>
+        <th style="width:10%; text-align:center;">Sr. No.</th>
+        <th>Topics</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="text-align:center;">1</td><td>Abstract</td></tr>
+      <tr><td style="text-align:center;">2</td><td>Introduction<br>&nbsp;&nbsp;2.1 Problem Statement<br>&nbsp;&nbsp;2.2 Project Objective</td></tr>
+      <tr><td style="text-align:center;">3</td><td>Planning Phase<br>&nbsp;&nbsp;3.1 Statement of Work (SOW)<br>&nbsp;&nbsp;3.2 Resource Plan</td></tr>
+      <tr><td style="text-align:center;">4</td><td>Requirements Analysis<br>&nbsp;&nbsp;4.1 Functional Requirements<br>&nbsp;&nbsp;4.2 Non-Functional Requirements</td></tr>
+      <tr><td style="text-align:center;">5</td><td>Design & System Architecture<br>&nbsp;&nbsp;5.1 Architectural Plan<br>&nbsp;&nbsp;5.2 ER Model<br>&nbsp;&nbsp;5.3 UI/UX Design Consideration</td></tr>
+      <tr><td style="text-align:center;">6</td><td>Implementation (Coding)<br>&nbsp;&nbsp;6.1 Modular Development Approach<br>&nbsp;&nbsp;6.2 AI Tools Integration<br>&nbsp;&nbsp;6.3 Integration with Frontend<br>&nbsp;&nbsp;6.4 State Management<br>&nbsp;&nbsp;6.5 API Design</td></tr>
+      <tr><td style="text-align:center;"><strong>7</strong></td><td><strong>Database Implementation (DDL & DML)</strong><br>&nbsp;&nbsp;7.1 Data Definition Language (DDL) Equivalents<br>&nbsp;&nbsp;7.2 Data Manipulation Language (DML) Equivalents</td></tr>
+      <tr><td style="text-align:center;">8</td><td>Testing & Quality Assurance<br>&nbsp;&nbsp;8.1 Testing Strategy<br>&nbsp;&nbsp;8.2 Test Cases<br>&nbsp;&nbsp;8.3 Scalability and Maintainability</td></tr>
+      <tr><td style="text-align:center;">9</td><td>Advantages of the Proposed Design</td></tr>
+      <tr><td style="text-align:center;">10</td><td>Conclusion</td></tr>
+      <tr><td style="text-align:center;">11</td><td>Future Scope</td></tr>
+    </tbody>
+  </table>
+  
+  <div class="doc-footer">
+    <span>Department of CSE (AI & ML)</span>
+    <span>Page i</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CONTENT PHASE 1
+══════════════════════════════════════════ -->
+<div class="page section-page">
+  <div class="doc-header">
+    <span class="doc-title">PCCOE AIML Website - DBMS Mini Project</span>
+  </div>
+
+  <div class="sec-heading">1. Abstract</div>
+  <p>
+    The transition towards digital platforms in academic institutions is essential for real-time information dissemination and efficient resource allocation. The "PCCOE AI & ML Department Website" project is a full-stack web application designed specifically for the AI & ML department of PCCOE. It provides a centralized ecosystem for students to view academic syllabi, study resources, college notices, and student achievements.
+  </p>
+  <p>
+    Built using React (Vite), Node.js, Express, and MongoDB, the system utilizes a modern three-tier architecture. It incorporates advanced AI features via the Groq API (LLaMA 3) and Gemini API, enabling automated PDF lecture summarization and a built-in AI Tutor for students. The platform replaces fragmented data sharing with a structured dashboard for teachers to manage notices, faculty details, and department queries efficiently.
+  </p>
+
+  <div class="sec-heading">2. Introduction</div>
+  <p>
+    Academic departments generate and distribute a vast amount of data—ranging from official notices and faculty details to lecture notes and study guides. Traditionally, this information is communicated via scattered emails, physical notice boards, or generic messaging applications, which makes tracking updates difficult and inefficient for both students and faculty.
+  </p>
+  <p>
+    To resolve this, the PCCOE AI & ML Department Website provides an integrated full-stack portal. Students can browse dedicated pages for AiMSA, AAAI, IEEE-CS, view academic achievements, and upload lecture PDFs directly into the platform to generate intelligent summaries using AI. 
+  </p>
+  <p>
+    Administratively, the project features a Teacher Dashboard secured by JSON Web Tokens (JWT). This backend allows faculty to actively perform CRUD operations on the department's database—updating notices, managing faculty profiles, and viewing student queries. By using MongoDB as the backend database, data scaling and document structure flexibility are achieved natively.
+  </p>
+
+  <div class="sub-heading">2.1 Problem Statement</div>
+  <p>
+    Currently, departmental information, administrative notices, and faculty data are managed through decentralized channels, making it difficult for students to locate critical academic resources promptly. Furthermore, there is a lack of accessible, department-specific AI study tools to assist students with long lecture notes or complex AI/ML concepts. Administrators and teaching staff also lack a unified, easily accessible digital dashboard to update website data without requiring code deployment.
+  </p>
+
+  <div class="sub-heading">2.2 Project Objective</div>
+  <p>
+    The primary purpose of this web application is to digitize and centralize the PCCOE AI & ML department’s operations. Key objectives include:
+  </p>
+  <ul class="normal-list">
+    <li><strong>Centralized Information Hub:</strong> Empower students to easily access syllabus files, placement statistics, notices, and club details in one responsive UI.</li>
+    <li><strong>Integrated AI Assistance:</strong> Provide built-in AI tools (Groq LLaMA and Gemini Flash) that generate summaries for uploaded PDFs and answer student queries interactively.</li>
+    <li><strong>Secure Teacher Portal:</strong> Provide authorized faculty with a secure dashboard to perform data manipulation operations (Create, Update, Delete) on Notice and Faculty schemas.</li>
+    <li><strong>Robust Database Management:</strong> Use MongoDB NoSQL database to store hierarchical and unstructured document data seamlessly.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <span>Department of CSE (AI & ML)</span>
+    <span>Page 1</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CONTENT PHASE 2
+══════════════════════════════════════════ -->
+<div class="page section-page">
+  <div class="doc-header">
+    <span class="doc-title">PCCOE AIML Website - DBMS Mini Project</span>
+  </div>
+
+  <div class="sec-heading">3. Planning Phase</div>
+  <div class="sub-heading">3.1 Statement of Work (SOW)</div>
+  <table class="bordered-table">
+    <tbody>
+      <tr><td><strong>Project Title</strong></td><td>PCCOE AI & ML Website - Full Stack Application</td></tr>
+      <tr><td><strong>Objective</strong></td><td>Develop a unified institutional platform providing department insights and AI study tools.</td></tr>
+      <tr><td><strong>Scope</strong></td><td>Frontend UI, Teacher Admin Panel, AI Summarization module, Database persistence.</td></tr>
+      <tr><td><strong>Deliverables</strong></td><td>Fully functional website + RESTful Node API + MongoDB Database.</td></tr>
+      <tr><td><strong>Timeline</strong></td><td>Iterative development (UI Design → Backend Logic & DB → Testing → Deployment).</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-heading">3.2 Resource Plan</div>
+  <table class="bordered-table">
+    <thead>
+      <tr><th>Resource Type</th><th>Component</th><th>Details</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Human</strong></td><td>Development Team</td><td>Full-Stack Developers, Database Designers</td></tr>
+      <tr><td rowspan="3"><strong>Technical</strong></td><td>Backend</td><td>Node.js, Express.js, JWT, Multer (File Uploads)</td></tr>
+      <tr><td>Frontend</td><td>React.js (Vite), TailwindCSS, Framer Motion</td></tr>
+      <tr><td>Database</td><td>MongoDB Atlas Cloud</td></tr>
+      <tr><td><strong>Tools</strong></td><td>Software</td><td>VS Code, Postman, MongoDB Compass</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-heading">4. Requirements Analysis</div>
+  <div class="sub-heading">4.1 Functional Requirements</div>
+  <ul class="normal-list">
+    <li>Students can navigate department details (Faculty, Syllabus, Chapters).</li>
+    <li>Students can submit contact form queries (stored in DB).</li>
+    <li>Teachers can login via a secure route endpoint.</li>
+    <li>Teachers can create, read, update, and delete Notice Board entries.</li>
+    <li>Students can upload PDF files; the system parses the text and generates an AI summary.</li>
+    <li>Toggle functionality for Dark Mode / Light Mode globally.</li>
+  </ul>
+
+  <div class="sub-heading">4.2 Non-Functional Requirements</div>
+  <ul class="normal-list">
+    <li>Fast response times via SPA (Single Page Application) routing.</li>
+    <li>Secure token-based authentication (JWT) for the backend.</li>
+    <li>Scalable NoSQL backend capable of handling document additions flexibly.</li>
+    <li>Highly responsive and animated UI components.</li>
+  </ul>
+
+  <div class="sec-heading">5. Design & System Architecture</div>
+  <div class="sub-heading">5.1 Architectural Plan</div>
+  <p><strong>Three-Tier Application Architecture:</strong></p>
+  <p>
+    The web platform is designed fundamentally as a 3-tier MERN stack application. The React client dynamically renders the views and manages states. The Express.js server facilitates API endpoints and proxies external AI processing requests. MongoDB serves as the persistence layer storing the state of Faculty, Notices, and Students.
+  </p>
+  <p><strong>Data Flow Explanation:</strong></p>
+  <ol class="normal-list" style="padding-left: 30px;">
+    <li>Faculty logs into the portal / Student visits the Home Page.</li>
+    <li>Frontend initiates a REST API request (GET/POST/PUT/DELETE).</li>
+    <li>Backend router verifies Authentication Middleware (if protected).</li>
+    <li>Mongoose queries the MongoDB database.</li>
+    <li>Retrieved JSON data is transmitted back to the React UI for rendering.</li>
+  </ol>
+
+  <div class="doc-footer">
+    <span>Department of CSE (AI & ML)</span>
+    <span>Page 2</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CONTENT PHASE 3
+══════════════════════════════════════════ -->
+<div class="page section-page">
+  <div class="doc-header">
+    <span class="doc-title">PCCOE AIML Website - DBMS Mini Project</span>
+  </div>
+
+  <div class="sub-heading">5.2 ER Model</div>
+  <p>
+    The ER model for the PCCOE AI & ML website manages essential administrative entities: <strong>Faculty, Notice, Contact,</strong> and <strong>Student</strong>. Given MongoDB's schema-less nature, collections are flexible but are structured via Mongoose Schemas to enforce data rules.
+  </p>
+  <p>
+    This design effectively supports the Teacher Dashboard capabilities, allowing administrative segregation. Operations like posting new departmental notices require updating the Notification data without affecting the user authentication collections.
+  </p>
+  
+  <div style="background: #f8fafc; border: 2px dashed #bae6fd; padding: 20px; text-align: center; margin: 20px 0; border-radius: 8px;">
+    <h4 style="color: #0369a1; margin-bottom: 10px;">Collection Schemas</h4>
+    <ul style="list-style-type: none; padding: 0; text-align: left; display: inline-block;">
+      <li>🔹 <strong>Faculty:</strong> _id (PK), name, designation, qualification, email, googleScholar</li>
+      <li>🔹 <strong>Notice:</strong> _id (PK), title, link, date, content, createdAt</li>
+      <li>🔹 <strong>Student:</strong> _id (PK), name, role, department, linkedin, email</li>
+      <li>🔹 <strong>Contact:</strong> _id (PK), name, email, subject, message, createdAt</li>
+    </ul>
+  </div>
+
+  <div class="sub-heading">5.3 UI/UX Design Consideration</div>
+  <ul class="normal-list">
+    <li>Glassmorphism and modern gradient overlays defining the primary visual identity.</li>
+    <li>Framer Motion powered custom cursors and page-transition animations.</li>
+    <li>Fully responsive layout adjusting seamlessly across mobile, tablet, and desptop dimensions.</li>
+    <li>ThemeContext implementation for intelligent Dark/Light mode tracking.</li>
+  </ul>
+
+  <div class="sec-heading">6. Implementation (Coding)</div>
+  <div class="sub-heading">6.1 Modular Development Approach</div>
+  <ul class="normal-list">
+    <li>The React application is subdivided into <code>/pages</code>, <code>/components</code>, and <code>/context</code> ensuring clean architectural boundaries.</li>
+    <li>Express backend endpoints are divided logically: <code>/api/faculty</code>, <code>/api/notices</code>, <code>/api/ai</code>.</li>
+  </ul>
+
+  <div class="sub-heading">6.2 AI Tools Integration</div>
+  <p>
+    The unique selling point of this deployment is its native AI integration. Endpoints within <code>/api/ai/summarize</code> receive multipart form-data (PDFs), which are memory-buffered utilizing <em>Multer</em>. <em>pdf-parse</em> extracts the text, which is chunked and piped into the <strong>Groq API (LLaMA 3.3-70B model)</strong> to generate highly structured JSON study materials.
+  </p>
+
+  <div class="sub-heading">6.3 Integration with Frontend</div>
+  <p>
+    The client employs React Hooks (<code>useState</code>, <code>useEffect</code>) to query the Express backend. State managers populate dynamic lists (like the Faculty grid or Notice accordion). Cross-Origin Resource Sharing (CORS) is enabled to allow smooth communication between ports 5173 (Vite) and 5000 (Node).
+  </p>
+
+  <div class="sub-heading">6.5 API Design</div>
+  <table class="bordered-table">
+    <thead>
+      <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>GET</td><td><code>/api/notices</code></td><td>Fetch all departmental notices</td></tr>
+      <tr><td>POST</td><td><code>/api/contact</code></td><td>Persist new visitor query into DB</td></tr>
+      <tr><td>POST</td><td><code>/api/ai/summarize</code></td><td>Upload PDF and receive generated AI JSON</td></tr>
+      <tr><td>POST</td><td><code>/api/faculty</code></td><td>(Admin) Create a new Faculty record</td></tr>
+    </tbody>
+  </table>
+
+  <div class="doc-footer">
+    <span>Department of CSE (AI & ML)</span>
+    <span>Page 3</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CONTENT PHASE 4 (DB QUERIES IMPORTANT!)
+══════════════════════════════════════════ -->
+<div class="page section-page">
+  <div class="doc-header">
+    <span class="doc-title">PCCOE AIML Website - DBMS Mini Project</span>
+  </div>
+
+
+  <!-- DATABASE SECTION -->
+  <div class="sec-heading">7. Database Implementation (DDL & DML)</div>
+  <p>
+    The PCCOE website operates using <strong>Supabase (PostgreSQL)</strong> as its primary persistent database. Traditional SQL terminology (DDL/DML) applies directly here, utilizing advanced PostgreSQL features like Row-Level Security (RLS) to restrict teacher/student data access effectively.
+  </p>
+
+  <div class="sub-heading">7.1 Data Definition Language (DDL)</div>
+  <p>DDL queries are executed to construct the Relational Schemas, setup triggers, and enforce foreign key constraints linking to Supabase's native auth users table.</p>
+  
+  <div class="code-block">
+<span class="code-comment">-- 1. Create the database table for study resources</span>
+<span class="code-keyword">CREATE TABLE IF NOT EXISTS</span> public.study_resources (
+    id UUID <span class="code-keyword">DEFAULT</span> gen_random_uuid() <span class="code-keyword">PRIMARY KEY</span>,
+    created_at <span class="code-keyword">TIMESTAMP WITH TIME ZONE DEFAULT</span> TIMEZONE(<span class="code-string">'utc'</span>::text, NOW()) <span class="code-keyword">NOT NULL</span>,
+    title TEXT <span class="code-keyword">NOT NULL</span>,
+    subject TEXT <span class="code-keyword">NOT NULL</span>,
+    unit TEXT,
+    file_url TEXT <span class="code-keyword">NOT NULL</span>,
+    storage_path TEXT <span class="code-keyword">NOT NULL</span>,
+    teacher_id UUID <span class="code-keyword">REFERENCES</span> auth.users(id) <span class="code-keyword">NOT NULL</span>
+);
+
+<span class="code-comment">-- 2. Enable RLS (Row Level Security) on the table</span>
+<span class="code-keyword">ALTER TABLE</span> public.study_resources <span class="code-keyword">ENABLE ROW LEVEL SECURITY</span>;
+  </div>
+
+  <div class="sub-heading">7.2 Data Manipulation Language (DML) & Policies</div>
+  <p>DML is used for inserting storage buckets, whilst Supabase Policies define exactly matching access rights for specific CRUD actions depending on the session's authentication state.</p>
+
+  <div class="code-block">
+<span class="code-comment">-- 1. Create the storage bucket</span>
+<span class="code-keyword">INSERT INTO</span> storage.buckets (id, name, public) 
+<span class="code-keyword">VALUES</span> (<span class="code-string">'study_resources'</span>, <span class="code-string">'study_resources'</span>, true)
+<span class="code-keyword">ON CONFLICT</span> (id) <span class="code-keyword">DO NOTHING</span>;
+
+<span class="code-comment">-- 2. Allow anyone (students) to view the resources</span>
+<span class="code-keyword">CREATE POLICY</span> <span class="code-string">"Public Read Access"</span> 
+<span class="code-keyword">ON</span> public.study_resources <span class="code-keyword">FOR SELECT USING</span> (true);
+
+<span class="code-comment">-- 3. Allow authenticated teachers to insert their own records</span>
+<span class="code-keyword">CREATE POLICY</span> <span class="code-string">"Teacher Insert Access"</span> 
+<span class="code-keyword">ON</span> public.study_resources <span class="code-keyword">FOR INSERT TO</span> authenticated 
+<span class="code-keyword">WITH CHECK</span> (auth.uid() = teacher_id);
+
+<span class="code-comment">-- 4. Allow authenticated teachers to delete their own records</span>
+<span class="code-keyword">CREATE POLICY</span> <span class="code-string">"Teacher Delete Access"</span> 
+<span class="code-keyword">ON</span> public.study_resources <span class="code-keyword">FOR DELETE TO</span> authenticated 
+<span class="code-keyword">USING</span> (auth.uid() = teacher_id);
+
+<span class="code-comment">-- 5. Storage Bucket Policies for PDFs</span>
+<span class="code-keyword">CREATE POLICY</span> <span class="code-string">"Public Read Access to Storage"</span>
+<span class="code-keyword">ON</span> storage.objects <span class="code-keyword">FOR SELECT USING</span> (bucket_id = <span class="code-string">'study_resources'</span>);
+
+<span class="code-keyword">CREATE POLICY</span> <span class="code-string">"Teacher Upload Access"</span>
+<span class="code-keyword">ON</span> storage.objects <span class="code-keyword">FOR INSERT TO</span> authenticated
+<span class="code-keyword">WITH CHECK</span> (bucket_id = <span class="code-string">'study_resources'</span> AND (storage.foldername(name))[1] != <span class="code-string">'private'</span>);
+  </div>
+
+  <div class="doc-footer">
+    <span>Department of CSE (AI & ML)</span>
+    <span>Page 4</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CONTENT PHASE 5
+══════════════════════════════════════════ -->
+<div class="page section-page">
+  <div class="doc-header">
+    <span class="doc-title">PCCOE AIML Website - DBMS Mini Project</span>
+  </div>
+
+  <div class="sec-heading">8. Testing & Quality Assurance</div>
+  <div class="sub-heading">8.1 Testing Strategy</div>
+  <ul class="normal-list">
+    <li><strong>Postman API Verification:</strong> Every endpoint including MongoDB persistence and Groq AI integrations were isolated and tested.</li>
+    <li><strong>Role-Based Access Testing:</strong> Verifying that only authenticated endpoints with valid JWT Bearer tokens operate DML queries like updating the Faculty table.</li>
+    <li><strong>Frontend Form Testing:</strong> Validating that the Contact and File Upload forms correctly throw native alerts regarding unsupported datatypes or blank strings.</li>
+  </ul>
+
+  <div class="sub-heading">8.2 Test Cases</div>
+  <table class="bordered-table">
+    <thead>
+      <tr><th>Test Case</th><th>Input</th><th>Expected Output</th><th>Actual Result</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Teacher Authentication</td><td>Valid Admin Credentials</td><td>Returns JWT Token & Route Unlocks</td><td>Passed</td></tr>
+      <tr><td>Submit General Query</td><td>Filled Contact Form</td><td>201 Inserted to Contact DB</td><td>Passed</td></tr>
+      <tr><td>Unauthenticated Delete</td><td>DELETE Request to Notice</td><td>401 Unauthorized Error</td><td>Handled correctly</td></tr>
+      <tr><td>Generate Summary PDF</td><td>PDF Data File</td><td>7-Section Exam JSON array</td><td>Passed</td></tr>
+      <tr><td>Render 48 Page Routes</td><td>Direct URL Navs</td><td>Components Render without Crash</td><td>Passed</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-heading">8.3 Scalability and Maintainability</div>
+  <p>The decision to leverage a component-based frontend framework (React) layered atop a document-based NoSQL database affords highly flexible maintenance operations. Mongoose schema expansion accepts new database columns dynamically. Utilizing <code>asyncHandler</code> middleware ensures robust server persistence against generic code failures.</p>
+
+  <div class="sec-heading">9. Advantages of the Proposed Design</div>
+  <p>
+    The newly established PCCOE web infrastructure heavily mitigates information silos. By integrating API routes specific to retrieving distinct JSON arrays, frontend UI rendering time is deeply optimized against traditional SSR webservers. Incorporating LLM intelligence completely replaces manual note simplification, granting competitive advantages to enrolled AI & ML students.
+  </p>
+
+  <div class="sec-heading">10. Conclusion</div>
+  <p>
+    The PCCOE AI & ML Website efficiently addresses the gap between departmental administration and digital student access. The integration of the Node.js API with MongoDB constructs a reliable pipeline capable of administrating thousands of records effortlessly. Incorporating modern layout principles alongside state-of-the-art NLP AI implementations solidifies the portal as an advanced, educational SaaS standard. The modular structure confirms that the platform can indefinitely evolve alongside the department itself.
+  </p>
+
+  <div class="sec-heading">11. Future Scope</div>
+  <ul class="normal-list">
+    <li>Implementation of Student-Login endpoints to provide specific dashboard grading views.</li>
+    <li>Scaling the AI services to accept diverse modalities (Video lecture summarization, Audio transcription).</li>
+    <li>Automated mass-mailer pipelines to notify students when Notice instances are newly instantiated in the database.</li>
+    <li>Deployment of cache-proxies (Redis) to accelerate high-frequency GET queries.</li>
+  </ul>
+
+  <div class="doc-footer">
+    <span>Department of CSE (AI & ML)</span>
+    <span>Page 5</span>
+  </div>
+</div>
+
+</body>
+</html>

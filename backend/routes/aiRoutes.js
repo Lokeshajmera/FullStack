@@ -99,36 +99,36 @@ IMPORTANT: The content must be so detailed and exhaustive that a student can ski
 FORMATTING RULE: Use Markdown BULLET POINTS for all content. Avoid large paragraphs at all costs.
 
 Return ONLY a valid JSON object with a key "summary" which is an array of section objects.
-The JSON must follow this exact structure:
+The JSON must follow this exact structure (make sure to properly escape newlines in your output as \\n):
 {
   "summary": [
     { 
       "title": "📖 OVERVIEW & CORE CONCEPTS", 
-      "content": "* Clear summary of the primary subject matter\n* Key takeaways and high-level goals\n* Why this topic is important for exams" 
+      "content": "* Clear summary of the primary subject matter\\n* Key takeaways and high-level goals\\n* Why this topic is important for exams" 
     },
     { 
       "title": "🎯 DETAILED TOPIC BREAKDOWN", 
-      "content": "* Topic 1: Sub-point with deep explanation and internal details\n* Topic 2: Sub-point with deep explanation and internal details\n* Step-by-step logic for common problems" 
+      "content": "* Topic 1: Sub-point with deep explanation and internal details\\n* Topic 2: Sub-point with deep explanation and internal details\\n* Step-by-step logic for common problems" 
     },
     { 
       "title": "📝 KEY DEFINITIONS & WORKED EXAMPLES", 
-      "content": "* **Term 1**: Exhaustive definition\n    * *Worked Example*: Complete step-by-step example from the text\n* **Term 2**: Exhaustive definition\n    * *Worked Example*: Complete step-by-step example from the text" 
+      "content": "* **Term 1**: Exhaustive definition\\n    * *Worked Example*: Complete step-by-step example from the text\\n* **Term 2**: Exhaustive definition\\n    * *Worked Example*: Complete step-by-step example from the text" 
     },
     { 
       "title": "💡 FORMULAS, THEOREMS & DERIVATIONS", 
-      "content": "* **Formula Name**: The mathematical equation/expression\n* Detailed explanation of every variable\n* Application rules or mathematical constraints" 
+      "content": "* **Formula Name**: The mathematical equation/expression\\n* Detailed explanation of every variable\\n* Application rules or mathematical constraints" 
     },
     { 
       "title": "🖼️ DIAGRAMS & SYSTEM LOGIC", 
-      "content": "* Technical description of state diagrams or charts\n* Sequence of transitions or logic flow explained via bullets\n* Functional logic breakdown" 
+      "content": "* Technical description of state diagrams or charts\\n* Sequence of transitions or logic flow explained via bullets\\n* Functional logic breakdown" 
     },
     { 
       "title": "❓ PROBABLE EXAM QUESTIONS", 
-      "content": "* **Q**: Likely exam question (theory or numerical)\n    * **A**: Exhaustive answer with supporting logic\n* **Q**: Practical problem-solving task\n    * **A**: Step-by-step solution pathway" 
+      "content": "* **Q**: Likely exam question (theory or numerical)\\n    * **A**: Exhaustive answer with supporting logic\\n* **Q**: Practical problem-solving task\\n    * **A**: Step-by-step solution pathway" 
     },
     { 
       "title": "✅ CRISP REVISION SUMMARY", 
-      "content": "* Single most critical fact to remember\n* The most important formula/rule\n* Critical edge cases that appear in exams" 
+      "content": "* Single most critical fact to remember\\n* The most important formula/rule\\n* Critical edge cases that appear in exams" 
     }
   ]
 }

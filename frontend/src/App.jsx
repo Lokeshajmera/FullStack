@@ -7,6 +7,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import About from './pages/About';
 import HODDesk from './pages/HODDesk';
@@ -67,6 +68,7 @@ function App() {
     <ThemeProvider>
       <AuthProvider>
         <Router>
+          <ScrollToTop />
           <div className="flex flex-col min-h-screen font-sans selection:bg-cyan-500/30">
             <motion.div
               className="fixed top-0 left-0 right-0 h-1 bg-cyan-500 origin-left z-[100]"
